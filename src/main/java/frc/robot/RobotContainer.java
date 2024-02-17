@@ -35,6 +35,7 @@ import frc.robot.commands.IntakeOverrideCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -51,6 +52,7 @@ public class RobotContainer {
   ArmSubsystem m_armSubsystem = new ArmSubsystem();
   IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   
   // Controllers
   public CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -65,6 +67,7 @@ public class RobotContainer {
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
   ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
   AlignToTagCmd m_alignToTagCmd = new AlignToTagCmd(m_swerveSubsystem);
+
 
   // Autos
   //exampleAuto m_exampleAuto = new exampleAuto(m_swerveSubsystem);
@@ -187,5 +190,10 @@ public class RobotContainer {
     m_armSubsystem.armCoastMode();
   }
 
+  public void climberControls() {
+    if(m_buttonBox.a().getAsBoolean()==false) {
+      m_climberSubsystem.climberMotorDown();
+    } else m_climberSubsystem.climberMotorOff();
+  }
   
 }

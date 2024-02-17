@@ -33,4 +33,10 @@ public class ClimberSubsystem extends SubsystemBase {
   public void climberMotorDown() {
     climberMotor.set(-0.2);
   }
+
+  public void climberMotorOff() {
+    climberMotor.set(0);
+  }
+
+
 }
