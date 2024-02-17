@@ -34,11 +34,10 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     Logger.recordOutput("Digital Input sensor", intakeSensor.get());
-    System.out.println(intakeSensor.get());
   }
 
   public void intakeOn() {
-    intakeMotor.set(0.25);
+    intakeMotor.set(0.45);
   }
 
   public void intakeOff() {
@@ -46,7 +45,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intakeOut() {
-    intakeMotor.set(-0.25);
+    intakeMotor.set(-0.45);
   }
 
   public boolean beamBreakSensor() {

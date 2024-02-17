@@ -21,13 +21,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 // import frc.robot.autos.exampleAuto;
 import frc.robot.commands.AlignToTagCmd;
+import frc.robot.commands.ArmAmpSetPoint;
 import frc.robot.commands.ArmDownCommand;
+import frc.robot.commands.ArmSetPointCommand;
 import frc.robot.commands.ArmUpCommand;
+import frc.robot.commands.ClimberDownCommand;
+import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.DriveTeleopCmd;
 import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
@@ -67,6 +72,10 @@ public class RobotContainer {
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
   ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
   AlignToTagCmd m_alignToTagCmd = new AlignToTagCmd(m_swerveSubsystem);
+  ClimberDownCommand m_climberDownCommand = new ClimberDownCommand(m_climberSubsystem);
+  ClimberUpCommand m_climberUpCommand = new ClimberUpCommand(m_climberSubsystem);
+  ArmSetPointCommand m_armsetPointCommand = new ArmSetPointCommand(m_armSubsystem);
+  ArmAmpSetPoint m_armAmpSetPoint = new ArmAmpSetPoint(m_armSubsystem);
 
 
   // Autos
@@ -144,6 +153,22 @@ public class RobotContainer {
       m_shooterCommand
       );
 
+    m_buttonBox.button(1).whileTrue(
+      m_climberDownCommand
+    );
+
+    m_buttonBox.button(3).whileTrue(
+      m_climberUpCommand
+    );
+
+    m_buttonBox.button(4).whileTrue(
+      m_armsetPointCommand
+    );
+
+    m_buttonBox.button(6).whileTrue(
+      m_armAmpSetPoint
+    );
+
 
 
     // m_driverController.leftBumper().whileTrue(
@@ -190,10 +215,8 @@ public class RobotContainer {
     m_armSubsystem.armCoastMode();
   }
 
-  public void climberControls() {
-    if(m_buttonBox.a().getAsBoolean()==false) {
-      m_climberSubsystem.climberMotorDown();
-    } else m_climberSubsystem.climberMotorOff();
+  public void dumdumClimber() {
+    m_climberSubsystem.jankClimber();
   }
   
 }

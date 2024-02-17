@@ -72,7 +72,7 @@ public class TurnToAngle extends Command {
         SwerveModuleState[] swerveModuleStates =
             Constants.DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         swerve.setModuleStates(swerveModuleStates);
-        System.out.println(targetPose2d.relativeTo(currPose2d));
+        //System.out.println(targetPose2d.relativeTo(currPose2d));
     }
 
     @Override
