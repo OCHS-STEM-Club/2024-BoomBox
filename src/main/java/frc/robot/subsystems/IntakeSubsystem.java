@@ -24,6 +24,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
     intakeMotor = new CANSparkMax(Constants.IntakeConstants.kIntakeMotorID, MotorType.kBrushless);
     intakeSensor = new DigitalInput(0);
+    intakeMotor.setInverted(false);
     }
   
 
@@ -33,6 +34,7 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
 
     Logger.recordOutput("Digital Input sensor", intakeSensor.get());
+    System.out.println(intakeSensor.get());
   }
 
   public void intakeOn() {

@@ -79,12 +79,13 @@ public class RobotContainer {
     // autoChooser = AutoBuilder.buildAutoChooser("New Auto");
     //autoChooser.addOption("example", m_exampleAuto);
 
-    // SmartDashboard.putData("Autos", autoChooser);
-    SmartDashboard.putData("Auto Chooser", autoChooser);
+     SmartDashboard.putData("Autos", autoChooser);
+    //SmartDashboard.putData("Auto Chooser", autoChooser);
     // Configure the trigger bindings
   
 
-    NamedCommands.registerCommand("shoot", m_shooterSubsystem.shooterShoot());
+    // NamedCommands.registerCommand("shoot", new TurnToAngle(m_swerveSubsystem, 90, false));
+    NamedCommands.registerCommand("SHOOT BEACH", new InstantCommand(() -> m_shooterSubsystem.shooterOn()));
 
     configureBindings();
   }
@@ -143,12 +144,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    * 
    */
-
-     List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(
-      new Pose2d(0,0, Rotation2d.fromDegrees(30)),
-      new Pose2d(0, 0, Rotation2d.fromDegrees(60)),
-      new Pose2d(0, 0, Rotation2d.fromDegrees(90))
-    );
   
 
   public Command getAutonomousCommand() {
@@ -157,18 +152,12 @@ public class RobotContainer {
     // Load the path you want to follow using its name in the GUI
 
 
-
-    PathPlannerPath path = new PathPlannerPath(
-      bezierPoints,
-      new PathConstraints(1, 1, 1, 1), 
-      new GoalEndState(0, Rotation2d.fromDegrees(90)));
-
-
     m_swerveSubsystem.resetPose();
     // // Create a path following command using AutoBuilder. This will also trigger event markers.
     // return AutoBuilder.followPath(path);
     //return autoChooser.getSelected();
     return autoChooser.getSelected();
+   
   }
 
   public void resetGyro() {
