@@ -82,7 +82,8 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    m_robotContainer.dumdumClimber();
+    //m_robotContainer.armDownAuto();
+    // m_robotContainer.dumdumClimber();
   }
 
   @Override

@@ -23,6 +23,7 @@ public class ArmSubsystem extends SubsystemBase {
   private RelativeEncoder armEncoderLeft;
   private RelativeEncoder armEncoderRight;
   private DigitalInput hardStop;
+  private boolean atshootervalue;
 
   private DutyCycleEncoder thru;
 
@@ -53,8 +54,9 @@ public class ArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-      System.out.println(armEncoderLeft.getPosition());
-      System.out.println(valueBoolean());
+     System.out.println(thru.getAbsolutePosition());
+    // System.out.println(armEncoderLeft.getPosition());
+    //System.out.println(valueBoolean());
   }
 
   public void armMotorUp() {
@@ -82,23 +84,21 @@ public class ArmSubsystem extends SubsystemBase {
     armMotorRight.setIdleMode(IdleMode.kCoast);
   }
 
-  public void shootValue() {
-  if (armEncoderLeft.getPosition() < 40) {
-      armMotorLeft.set(0.5);
-      armMotorRight.set(0.5);
+  public void ArmMove() {
+  if (armEncoderLeft.getPosition() > 0.2) {
+      armMotorDown();
     } else 
-      armMotorLeft.set(0);
-      armMotorRight.set(0);
+      armOff();
   }
 
   public boolean valueBoolean() {
-    if (armEncoderLeft.getPosition() < 50) {
+    if (thru.getAbsolutePosition() < 0.2) {
       return false;
     } else return true;
   }
 
   public boolean ampValueBoolean() {
-    if (armEncoderLeft.getPosition() < 570) {
+    if (armEncoderLeft.getPosition() < 0.41) {
       return false;
     } else return true;
   }
