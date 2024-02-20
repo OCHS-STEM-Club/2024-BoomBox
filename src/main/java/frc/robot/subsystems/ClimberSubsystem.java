@@ -17,6 +17,7 @@ public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new climberSubsystem. */
   private CANSparkMax climberMotor;
   private RelativeEncoder climberEncoder;
+  public boolean climberbool;
 
   public ClimberSubsystem() {
     climberMotor = new CANSparkMax(Constants.ClimberConstants.kClimberMotorID, MotorType.kBrushless);
@@ -26,15 +27,17 @@ public class ClimberSubsystem extends SubsystemBase {
     climberMotor.setSmartCurrentLimit(40, 40);
 
     climberEncoder.setPosition(0);
+    
   }
   @Override
   public void periodic() {
     //System.out.println(climberEncoder.getPosition());
+    System.out.println(climberbool);
     // This method will be called once per scheduler run
   }
 
   public void climberDown() {
-    if (climberEncoder.getPosition() < 6.4) {
+    if (climberEncoder.getPosition() < 6.6) {
       climberMotor.set(0.65);
     } else climberMotor.set(0);
 }
@@ -50,10 +53,21 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void jankClimber() {
-    if(climberEncoder.getPosition() < 6.75) {
+    if(climberEncoder.getPosition() < 6.5) {
       climberDown();
+      climberbool = false;
+
     } else climberOff();
+      climberbool = true;
   }
+
+  public boolean isClimberdown() {
+    if(climberbool == true) {
+      return true;
+    } else 
+      return false;
+  }
+
 
 
 

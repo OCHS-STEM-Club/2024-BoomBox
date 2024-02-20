@@ -84,32 +84,24 @@ public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // All of the Names Commands
     NamedCommands.registerCommand("Intake In", Commands.runOnce(() -> m_intakeSubsystem.intakeOn()));
     NamedCommands.registerCommand("Intake Off", Commands.runOnce(() -> m_intakeSubsystem.intakeOff()));
     NamedCommands.registerCommand("Shooter On", Commands.runOnce(() -> m_shooterSubsystem.shooterOn()));
     NamedCommands.registerCommand("Shooter Off", Commands.runOnce(() -> m_shooterSubsystem.shooterOff()));
+    NamedCommands.registerCommand("Climber down", Commands.runOnce(() -> m_climberSubsystem.jankClimber()));
+    NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
+    NamedCommands.registerCommand("Arm Down", Commands.run(() -> m_armSubsystem.ArmMove()));
 
-      NamedCommands.registerCommand("Arm Down", m_IntakeOverrideCommand);
-
-        NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
 
 
     m_swerveSubsystem.setDefaultCommand(m_driveTeleopCmd);
+
     autoChooser = AutoBuilder.buildAutoChooser();
-    autoChooser.addOption(
-      "TurnToAngle", new TurnToAngle(m_swerveSubsystem, -90, false));
-   
-    // autoChooser = AutoBuilder.buildAutoChooser("New Auto");
-    //autoChooser.addOption("example", m_exampleAuto);
 
-     SmartDashboard.putData("Autos", autoChooser);
-    //SmartDashboard.putData("Auto Chooser", autoChooser);
+    SmartDashboard.putData("Autos", autoChooser);
+
     // Configure the trigger bindings
-  
-
-    // NamedCommands.registerCommand("shoot", new TurnToAngle(m_swerveSubsystem, 90, false));
-    NamedCommands.registerCommand("SHOOT BEACH", new InstantCommand(() -> m_shooterSubsystem.shooterOn()));
-
     configureBindings();
   }
 
@@ -127,9 +119,9 @@ public class RobotContainer {
       new InstantCommand(m_swerveSubsystem::resetHeading, m_swerveSubsystem)
       );
 
-    m_driverController.y().onTrue(
-      new InstantCommand(m_swerveSubsystem::resetPose, m_swerveSubsystem)
-      );
+    // m_driverController.y().onTrue(
+    //   new InstantCommand(m_swerveSubsystem::resetPose, m_swerveSubsystem)
+    //   );
 
     m_buttonBox.pov(0).whileTrue(
       m_armUpCommand);
@@ -153,13 +145,13 @@ public class RobotContainer {
       m_shooterCommand
       );
 
-    m_buttonBox.button(1).whileTrue(
-      m_climberDownCommand
-    );
+    // m_buttonBox.button(1).whileTrue(
+    //   m_climberDownCommand
+    // );
 
-    m_buttonBox.button(3).whileTrue(
-      m_climberUpCommand
-    );
+    // m_buttonBox.button(3).whileTrue(
+    //   m_climberUpCommand
+    // );
 
     m_buttonBox.button(4).whileTrue(
       m_armsetPointCommand
@@ -218,5 +210,23 @@ public class RobotContainer {
   public void dumdumClimber() {
     m_climberSubsystem.jankClimber();
   }
-  
+
+  // public boolean isClimberdown()  {
+  //   return m_climberSubsystem.isClimberdown();
+  // }
+
+  // public void ArmAutoMove() {
+  //   m_armSubsystem.ArmMove();
+  // }
+
+  public void armDownAuto() {
+    m_climberSubsystem.jankClimber();
+    if (m_climberSubsystem.isClimberdown() == true) {
+        m_armSubsystem.ArmMove();
+    } else m_armSubsystem.armOff();
+  }
+
 }
+
+  
+
