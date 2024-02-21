@@ -42,7 +42,7 @@ public final class Constants {
     public static final int kRearRightEncoderID = 9;
 
     // CANCoder magnetic offsets
-    public static final double kFrontLeftMagneticOffset = 0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
+    public static final double kFrontLeftMagneticOffset = 0.084717; //0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
     public static final double kFrontRightMagneticOffset = 0.162598; //-0.379639; //Version 1: 0.163086
     public static final double kRearLeftMagneticOffset = -0.370605; //-0.055664; //Version 1: -0.362793
     public static final double kRearRightMagneticOffset = 0.277832; //Version 1: 0.296387
