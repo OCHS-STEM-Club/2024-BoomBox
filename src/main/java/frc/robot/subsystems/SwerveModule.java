@@ -62,6 +62,8 @@ public class SwerveModule {
 
     m_driveMotor.setIdleMode(IdleMode.kBrake);
 
+    m_driveMotor.setSmartCurrentLimit(20, 20);
+
     // Turn encoder configuration
     CANcoderConfiguration config = new CANcoderConfiguration();
     config.MagnetSensor.MagnetOffset = magneticOffset;

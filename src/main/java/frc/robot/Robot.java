@@ -83,7 +83,7 @@ public class Robot extends LoggedRobot {
   @Override
   public void autonomousPeriodic() {
     //m_robotContainer.armDownAuto();
-    // m_robotContainer.dumdumClimber();
+     m_robotContainer.dumdumClimber();
   }
 
   @Override

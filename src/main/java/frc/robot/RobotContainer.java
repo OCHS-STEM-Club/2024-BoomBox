@@ -27,9 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 // import frc.robot.autos.exampleAuto;
 import frc.robot.commands.AlignToTagCmd;
-import frc.robot.commands.ArmAmpSetPoint;
 import frc.robot.commands.ArmDownCommand;
-import frc.robot.commands.ArmSetPointCommand;
 import frc.robot.commands.ArmUpCommand;
 import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberUpCommand;
@@ -39,6 +37,9 @@ import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeOverrideCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.TurnToAngle;
+import frc.robot.commands.setpoints.AmpSetpoint;
+import frc.robot.commands.setpoints.IntakeSetpoint;
+import frc.robot.commands.setpoints.ShooterSetpoint;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -74,8 +75,9 @@ public class RobotContainer {
   AlignToTagCmd m_alignToTagCmd = new AlignToTagCmd(m_swerveSubsystem);
   ClimberDownCommand m_climberDownCommand = new ClimberDownCommand(m_climberSubsystem);
   ClimberUpCommand m_climberUpCommand = new ClimberUpCommand(m_climberSubsystem);
-  ArmSetPointCommand m_armsetPointCommand = new ArmSetPointCommand(m_armSubsystem);
-  ArmAmpSetPoint m_armAmpSetPoint = new ArmAmpSetPoint(m_armSubsystem);
+  IntakeSetpoint m_intakeSetpoint = new IntakeSetpoint(m_armSubsystem);
+  ShooterSetpoint m_shooterSetpoint = new ShooterSetpoint(m_armSubsystem);
+  AmpSetpoint m_ampSetpoint = new AmpSetpoint(m_armSubsystem);
 
 
   // Autos
@@ -145,20 +147,24 @@ public class RobotContainer {
       m_shooterCommand
       );
 
-    // m_buttonBox.button(1).whileTrue(
-    //   m_climberDownCommand
-    // );
+    m_buttonBox.button(1).whileTrue(
+      m_climberDownCommand
+    );
 
-    // m_buttonBox.button(3).whileTrue(
-    //   m_climberUpCommand
-    // );
+    m_buttonBox.button(3).whileTrue(
+      m_climberUpCommand
+    );
 
     m_buttonBox.button(4).whileTrue(
-      m_armsetPointCommand
+      m_intakeSetpoint
     );
 
     m_buttonBox.button(6).whileTrue(
-      m_armAmpSetPoint
+      m_shooterSetpoint
+    );
+
+    m_buttonBox.button(5).whileTrue(
+      m_ampSetpoint
     );
 
 

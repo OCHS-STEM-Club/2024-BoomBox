@@ -24,27 +24,27 @@ public class ClimberSubsystem extends SubsystemBase {
     climberEncoder = climberMotor.getEncoder();
     climberMotor.setIdleMode(IdleMode.kBrake);
     climberMotor.setInverted(false);
-    climberMotor.setSmartCurrentLimit(40, 40);
+    climberMotor.setSmartCurrentLimit(10, 10);
 
     climberEncoder.setPosition(0);
     
   }
   @Override
   public void periodic() {
-    //System.out.println(climberEncoder.getPosition());
-    System.out.println(climberbool);
+    System.out.println(climberEncoder.getPosition());
+   // System.out.println(climberbool);
     // This method will be called once per scheduler run
   }
 
   public void climberDown() {
-    if (climberEncoder.getPosition() < 6.6) {
-      climberMotor.set(0.65);
+    if (climberEncoder.getPosition() < 20) {
+      climberMotor.set(0.8);
     } else climberMotor.set(0);
 }
 
   public void climberUp() {
    if (climberEncoder.getPosition() > 0) {
-      climberMotor.set(-0.65);
+      climberMotor.set(-0.8);
     } else climberMotor.set(0);
   }
 
