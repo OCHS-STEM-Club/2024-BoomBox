@@ -31,7 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    System.out.println(climberEncoder.getPosition());
+    // System.out.println(climberEncoder.getPosition());
    // System.out.println(climberbool);
     // This method will be called once per scheduler run
   }

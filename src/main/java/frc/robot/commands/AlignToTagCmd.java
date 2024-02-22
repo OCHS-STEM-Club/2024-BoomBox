@@ -16,9 +16,9 @@ public class AlignToTagCmd extends Command {
   private NetworkTableInstance m_inst;
   private NetworkTable m_table;
 
-  private PIDController m_xPIDController = new PIDController(0.05, 0, 0);
+  private PIDController m_xPIDController = new PIDController(0.01, 0, 0);
   private PIDController m_yPIDController = new PIDController(0.01, 0, 0);
-  private PIDController m_rotPIDController = new PIDController(0.01, 0, 0);
+  private PIDController m_rotPIDController = new PIDController(0.0001, 0, 0);
 
   /** Creates a new AlignToTagCmd. */
   public AlignToTagCmd(SwerveSubsystem swerveSubsystem) {
@@ -53,7 +53,7 @@ public class AlignToTagCmd extends Command {
     if (Math.abs(tx) <= 2) {
       ySpeed = 0;
     } else {
-      ySpeed = -m_yPIDController.calculate(tx, 0);
+      ySpeed = m_yPIDController.calculate(tx, 0);
     }
 
     if (ta == 0) {
@@ -63,20 +63,20 @@ public class AlignToTagCmd extends Command {
     if (Math.abs(ta - rangeGoal) <= 1) {
       xSpeed = 0;
     } else {
-      xSpeed = m_xPIDController.calculate(ta, rangeGoal);
+      xSpeed = -m_xPIDController.calculate(ta, rangeGoal);
     }
 
     if (ta < 2) {
       m_swerveSubsystem.drive(
         xSpeed,
         0,
-        -m_rotPIDController.calculate(botpose[5], 0)
+        m_rotPIDController.calculate(botpose[5], 0)
       );
     } else {
       m_swerveSubsystem.drive(
         xSpeed,
         ySpeed,
-        -m_rotPIDController.calculate(botpose[5], 0)
+        m_rotPIDController.calculate(botpose[5], 0)
       );
     }
   }

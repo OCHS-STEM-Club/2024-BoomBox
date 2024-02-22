@@ -166,12 +166,9 @@ public class RobotContainer {
     m_buttonBox.button(5).whileTrue(
       m_ampSetpoint
     );
-
-
-
-    // m_driverController.leftBumper().whileTrue(
-    //   m_alignToTagCmd
-    //   );
+    m_driverController.b().whileTrue(
+      m_alignToTagCmd
+      );
 
   }
 

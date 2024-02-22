@@ -63,9 +63,11 @@ public class ArmSubsystem extends SubsystemBase {
     upperHardStop = new DigitalInput(1);
 
     armPIDController = armMotorRight.getPIDController();
+    
     armPIDController.setP(0.85);
     armPIDController.setD(20);
     armPIDController.setOutputRange(-1, 1);
+    // armPIDController.setFeedbackDevice(thru);
     
   }
 
@@ -73,7 +75,7 @@ public class ArmSubsystem extends SubsystemBase {
   public void periodic() {
 
     // This method will be called once per scheduler run
-     System.out.println(thru.getAbsolutePosition());
+    //  System.out.println(thru.getAbsolutePosition());
      //System.out.println(armEncoderLeft.getPosition());
     //System.out.println(valueBoolean());
 
