@@ -75,13 +75,13 @@ final MotionMagicVoltage m_request = new MotionMagicVoltage(0);
 
   }
 
-  public void shooterOn() {
-    shooterMotorLeft.set(0.4);
-    shooterMotorRight.set(0.4);
+  public void shooterOn(double speed) {
+    shooterMotorLeft.set(speed);
+    shooterMotorRight.set(speed);
   }
 
   public InstantCommand shooterShoot(){
-    return new InstantCommand(() -> shooterOn(), this);
+    return new InstantCommand(() -> shooterOn(0.4), this);
   }
 
   public void shooterOff() {
@@ -97,4 +97,5 @@ final MotionMagicVoltage m_request = new MotionMagicVoltage(0);
   public StatusSignal<Double> rightShooterVelocity() {
     return shooterMotorRight.getVelocity();
   }
+  
 }

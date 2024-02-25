@@ -38,14 +38,18 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public void climberDown() {
     if (climberEncoder.getPosition() < 20) {
-      climberMotor.set(0.8);
+      climberMotor.set(0.98);
     } else climberMotor.set(0);
 }
 
   public void climberUp() {
    if (climberEncoder.getPosition() > 0) {
-      climberMotor.set(-0.8);
+      climberMotor.set(-0.98);
     } else climberMotor.set(0);
+  }
+
+  public void climberUpOverride() {
+  climberMotor.set(-0.8);
   }
 
   public void climberOff() {
@@ -53,7 +57,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void jankClimber() {
-    if(climberEncoder.getPosition() < 6.5) {
+    if(climberEncoder.getPosition() < 20) {
       climberDown();
       climberbool = false;
 

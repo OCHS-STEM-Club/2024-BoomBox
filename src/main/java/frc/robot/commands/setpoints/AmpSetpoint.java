@@ -25,8 +25,13 @@ public class AmpSetpoint extends Command {
   @Override
   public void execute() {
     m_armSubsystem.ampSetpoint();
-  }
 
+  //   if (m_armSubsystem.upperHardStop() == false) {
+  //     m_armSubsystem.armOff();
+  //   } else 
+  //       m_armSubsystem.ampSetpoint();
+  }
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

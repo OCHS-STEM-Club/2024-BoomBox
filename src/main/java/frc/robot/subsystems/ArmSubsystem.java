@@ -10,9 +10,11 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkPIDController;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
@@ -35,16 +37,20 @@ public class ArmSubsystem extends SubsystemBase {
 
   private double speed;
 
-  private SparkPIDController armPIDController;
-  private double m_setpoint = 0;
-  private double pidReference = 0;
-  private double armPValue = 0;
-  private double armDValue = 0;
+   private SparkPIDController armPIDController;
+  // private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
+  // private double m_setpoint = 0;
+  // private double pidReference = 0;
+  // private double armPValue = 0;
+  // private double armDValue = 0;
+
+  //private PIDController pid = new PIDController(0.5, 0, 0);
 
   public ArmSubsystem() {
     armMotorLeft = new CANSparkMax(Constants.ArmConstants.kArmMotorLeftID, MotorType.kBrushless);
     armMotorRight = new CANSparkMax(Constants.ArmConstants.kArmMotorRightID, MotorType.kBrushless);
     thru = new DutyCycleEncoder(3);
+
     armEncoderLeft = armMotorLeft.getEncoder();
     armEncoderRight = armMotorRight.getEncoder();
     armMotorLeft.setIdleMode(IdleMode.kBrake);
@@ -63,12 +69,11 @@ public class ArmSubsystem extends SubsystemBase {
     upperHardStop = new DigitalInput(1);
 
     armPIDController = armMotorRight.getPIDController();
-    
+
     armPIDController.setP(0.85);
     armPIDController.setD(20);
     armPIDController.setOutputRange(-1, 1);
-    // armPIDController.setFeedbackDevice(thru);
-    
+
   }
 
   @Override
@@ -76,15 +81,18 @@ public class ArmSubsystem extends SubsystemBase {
 
     // This method will be called once per scheduler run
     //  System.out.println(thru.getAbsolutePosition());
-     //System.out.println(armEncoderLeft.getPosition());
-    //System.out.println(valueBoolean());
+    //SmartDashboard.putNumber("PID shooter setpoint value", pid.calculate(thru.getAbsolutePosition()));
 
-    //armPValue = SmartDashboard.getNumber("Arm P Value", 0);
-    //armDValue = SmartDashboard.getNumber("Arm D Value", 0);
+    SmartDashboard.putNumber("Arm Encoder", thru.getDistance());
 
-    //armPIDController.setP(armPValue);
-    //armPIDController.setD(armDValue);
+    SmartDashboard.putNumber("Built-In Right Encoder", armMotorRight.getEncoder().getPosition());
 
+    if (lowerHardStop.get() == false) {
+      thru.reset();
+      armEncoderLeft.setPosition(0);
+      armEncoderRight.setPosition(0);
+      armPIDController.setReference(0, ControlType.kPosition);
+    }
 
 
   }
@@ -98,11 +106,16 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void armMotorUp() {
-    armMotorRight.set(0.3);
+    armMotorRight.set(0.2);
 }
 
+
+
+
+
+
   public void armMotorDown() {
-    armMotorRight.set(-0.3);
+    armMotorRight.set(-0.2);
 }
 
   public void armOff() {
@@ -133,15 +146,36 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void intakeSetpoint() {
-    armPIDController.setReference(0, ControlType.kPosition);
+    armPIDController.setReference(-3.75, ControlType.kPosition);
+    //armMotorRight.set(pid.calculate(thru.getAbsolutePosition(), -0.3));
   }
 
   public void shooterSetpoint() {
-    armPIDController.setReference(1, ControlType.kPosition);
+    armPIDController.setReference(-3, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),-0.36));
   }
 
   public void ampSetpoint() {
-    armPIDController.setReference(4.5, ControlType.kPosition);
+     armPIDController.setReference(0.25, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
+  }
+
+    public void trapSetpoint() {
+     armPIDController.setReference(-2.75, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
+  }
+
+  public double getAbsolutePosition() {
+    return thru.getAbsolutePosition();
+  }
+  
+  public void resetEverything() {
+     if (lowerHardStop.get() == false) {
+      thru.reset();
+      armEncoderLeft.setPosition(0);
+      armEncoderRight.setPosition(0);
+      armPIDController.setReference(0, ControlType.kPosition);
+    }
   }
 
 

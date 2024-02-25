@@ -221,6 +221,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "7,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Arm Encoder",
+              "_title": "Arm Encoder",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Built-In Right Encoder",
+              "_title": "Built-In Right Encoder",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }

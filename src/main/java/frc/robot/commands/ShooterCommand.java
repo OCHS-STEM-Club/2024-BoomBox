@@ -26,7 +26,7 @@ private ShooterSubsystem m_shooterSubsystem;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_shooterSubsystem.shooterOn();
+      m_shooterSubsystem.shooterOn(0.4);
   }
 
   // Called once the command ends or is interrupted.

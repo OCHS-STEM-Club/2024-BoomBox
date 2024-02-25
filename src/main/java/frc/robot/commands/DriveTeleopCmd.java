@@ -5,7 +5,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.SwerveSubsystem;
@@ -15,10 +17,15 @@ public class DriveTeleopCmd extends Command {
 
   private final CommandXboxController m_controller;
 
+  private final CommandJoystick m_driveJoystick;
+  private final CommandJoystick m_rotJoystick;
+
   /** Creates a new DriveTeleopCmd. */
-  public DriveTeleopCmd(SwerveSubsystem swerveSubsystem, CommandXboxController controller) {
+  public DriveTeleopCmd(SwerveSubsystem swerveSubsystem, CommandXboxController controller, CommandJoystick driveJoystick, CommandJoystick rotJoystick) {
     m_swerveSubsystem = swerveSubsystem;
     m_controller = controller;
+    m_driveJoystick = driveJoystick;
+    m_rotJoystick = rotJoystick;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(swerveSubsystem);
@@ -32,9 +39,9 @@ public class DriveTeleopCmd extends Command {
   @Override
   public void execute() {
 
-    double xSpeed = -MathUtil.applyDeadband(m_controller.getLeftY(), OperatorConstants.kDriverControllerDeadband * 0.9);
-    double ySpeed = MathUtil.applyDeadband(m_controller.getLeftX(), OperatorConstants.kDriverControllerDeadband * 0.9);
-    double rotSpeed = MathUtil.applyDeadband(m_controller.getRightX(), OperatorConstants.kDriverControllerDeadband * 0.9);
+    double xSpeed = -MathUtil.applyDeadband(m_driveJoystick.getRawAxis(1), OperatorConstants.kDriverControllerDeadband * 0.9);
+    double ySpeed = MathUtil.applyDeadband(m_driveJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband * 0.9);
+    double rotSpeed = MathUtil.applyDeadband(m_rotJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband * 0.9);
 
     m_swerveSubsystem.drive(xSpeed, ySpeed, rotSpeed, true);
 
