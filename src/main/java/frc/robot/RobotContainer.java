@@ -100,7 +100,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake In", Commands.runOnce(() -> m_intakeSubsystem.intakeOn()));
     NamedCommands.registerCommand("Intake Off", Commands.runOnce(() -> m_intakeSubsystem.intakeOff()));
     NamedCommands.registerCommand("Shooter On", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.4)));
-    NamedCommands.registerCommand("Shooter On (IamSPED)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.6)));
+    NamedCommands.registerCommand("Shooter On (IamSPED)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.5)));
     NamedCommands.registerCommand("Shooter Off", Commands.runOnce(() -> m_shooterSubsystem.shooterOff()));
     NamedCommands.registerCommand("Climber down", Commands.runOnce(() -> m_climberSubsystem.jankClimber()));
     NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));

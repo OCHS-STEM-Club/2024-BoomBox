@@ -161,7 +161,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
     public void trapSetpoint() {
-     armPIDController.setReference(-2.75, ControlType.kPosition);
+     armPIDController.setReference(-2, ControlType.kPosition);
    // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
   }
 
