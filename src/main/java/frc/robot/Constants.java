@@ -22,6 +22,19 @@ import edu.wpi.first.math.util.Units;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+  public static final Mode currentMode = Mode.REAL;
+
+  public static enum Mode {
+    /** Running on a real robot. */
+    REAL,
+
+    /** Running a physics simulator. */
+    SIM,
+
+    /** Replaying from a log file. */
+    REPLAY
+  }
   public static class DriveConstants {
     // Constants that are not the same across all swerve modules
 
@@ -42,10 +55,10 @@ public final class Constants {
     public static final int kRearRightEncoderID = 9;
 
     // CANCoder magnetic offsets
-    public static final double kFrontLeftMagneticOffset = 0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
-    public static final double kFrontRightMagneticOffset = 0.162598; //-0.379639; //Version 1: 0.163086
-    public static final double kRearLeftMagneticOffset = -0.370605; //-0.055664; //Version 1: -0.362793
-    public static final double kRearRightMagneticOffset = 0.277832; //Version 1: 0.296387
+    public static final double kFrontLeftMagneticOffset = 0.088379; //0.084717; //0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
+    public static final double kFrontRightMagneticOffset = 0.154541; //0.162598; //-0.379639; //Version 1: 0.163086
+    public static final double kRearLeftMagneticOffset = -0.357178; //-0.370605; //-0.055664; //Version 1: -0.362793
+    public static final double kRearRightMagneticOffset = 0.284180; //0.277832; //Version 1: 0.296387
 
     // Motor inversions
     public static final boolean kFrontLeftDriveInverted = true;
@@ -107,9 +120,10 @@ public final class Constants {
   }
 
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 1;
-    public static final double kDriverControllerDeadband = 0.05;
+    public static final int kDriverdriveControllerPort = 0;
+    public static final int kDriverrotControllerPort = 1;
+    public static final int kOperatorControllerPort = 2;
+    public static final double kDriverControllerDeadband = 0.1;
   }
 
   public static class IntakeConstants {

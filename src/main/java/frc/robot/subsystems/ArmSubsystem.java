@@ -4,17 +4,24 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
+import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkPIDController;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class ArmSubsystem extends SubsystemBase {
   /** Creates a new ArmSubsystem. */
@@ -22,16 +29,28 @@ public class ArmSubsystem extends SubsystemBase {
   private CANSparkMax armMotorRight;
   private RelativeEncoder armEncoderLeft;
   private RelativeEncoder armEncoderRight;
-  private DigitalInput hardStop;
+  private DigitalInput lowerHardStop;
+  private DigitalInput upperHardStop;
+  private boolean atshootervalue;
 
   private DutyCycleEncoder thru;
 
   private double speed;
 
+   private SparkPIDController armPIDController;
+  // private static final SparkMaxAlternateEncoder.Type kAltEncType = SparkMaxAlternateEncoder.Type.kQuadrature;
+  // private double m_setpoint = 0;
+  // private double pidReference = 0;
+  // private double armPValue = 0;
+  // private double armDValue = 0;
+
+  //private PIDController pid = new PIDController(0.5, 0, 0);
+
   public ArmSubsystem() {
     armMotorLeft = new CANSparkMax(Constants.ArmConstants.kArmMotorLeftID, MotorType.kBrushless);
     armMotorRight = new CANSparkMax(Constants.ArmConstants.kArmMotorRightID, MotorType.kBrushless);
     thru = new DutyCycleEncoder(3);
+
     armEncoderLeft = armMotorLeft.getEncoder();
     armEncoderRight = armMotorRight.getEncoder();
     armMotorLeft.setIdleMode(IdleMode.kBrake);
@@ -41,31 +60,63 @@ public class ArmSubsystem extends SubsystemBase {
     // armMotorRight.setSmartCurrentLimit(30, 15);
     // armMotorLeft.setSmartCurrentLimit(30, 15);
 
-    armMotorRight.setSmartCurrentLimit(40, 40);
-    armMotorLeft.setSmartCurrentLimit(40, 40);
+    armMotorRight.setSmartCurrentLimit(30, 20);
+    armMotorLeft.setSmartCurrentLimit(30, 20);
     
     armMotorLeft.follow(armMotorRight);
 
-    hardStop = new DigitalInput(1);
-    
+    lowerHardStop = new DigitalInput(2);
+    upperHardStop = new DigitalInput(1);
+
+    armPIDController = armMotorRight.getPIDController();
+
+    armPIDController.setP(0.85);
+    armPIDController.setD(20);
+    armPIDController.setOutputRange(-1, 1);
+
   }
 
   @Override
   public void periodic() {
+
     // This method will be called once per scheduler run
-      System.out.println(armEncoderLeft.getPosition());
-      System.out.println(valueBoolean());
+    //  System.out.println(thru.getAbsolutePosition());
+    //SmartDashboard.putNumber("PID shooter setpoint value", pid.calculate(thru.getAbsolutePosition()));
+
+    SmartDashboard.putNumber("Arm Encoder", thru.getDistance());
+
+    SmartDashboard.putNumber("Built-In Right Encoder", armMotorRight.getEncoder().getPosition());
+
+    if (lowerHardStop.get() == false) {
+      thru.reset();
+      armEncoderLeft.setPosition(0);
+      armEncoderRight.setPosition(0);
+      armPIDController.setReference(0, ControlType.kPosition);
+    }
+
+
+  }
+
+  public boolean lowerHardStop() {
+    return lowerHardStop.get();
+  }
+
+  public boolean upperHardStop() {
+    return upperHardStop.get();
   }
 
   public void armMotorUp() {
-    armMotorLeft.set(0.3);
-    armMotorRight.set(0.3);
-  }
+    armMotorRight.set(0.2);
+}
+
+
+
+
+
 
   public void armMotorDown() {
-    armMotorLeft.set(-0.3);
-    armMotorRight.set(-0.3);
-  }
+    armMotorRight.set(-0.2);
+}
 
   public void armOff() {
     armMotorLeft.set(0);
@@ -82,30 +133,51 @@ public class ArmSubsystem extends SubsystemBase {
     armMotorRight.setIdleMode(IdleMode.kCoast);
   }
 
-  public void shootValue() {
-  if (armEncoderLeft.getPosition() < 40) {
-      armMotorLeft.set(0.5);
-      armMotorRight.set(0.5);
+  public void ArmMove() {
+  if (armEncoderLeft.getPosition() > 0.2) {
+      armMotorDown();
     } else 
-      armMotorLeft.set(0);
-      armMotorRight.set(0);
-  }
-
-  public boolean valueBoolean() {
-    if (armEncoderLeft.getPosition() < 50) {
-      return false;
-    } else return true;
-  }
-
-  public boolean ampValueBoolean() {
-    if (armEncoderLeft.getPosition() < 570) {
-      return false;
-    } else return true;
+      armOff();
   }
 
   public void set(double speed) {
       armMotorLeft.set(speed);
       armMotorRight.set(speed);
   }
+
+  public void intakeSetpoint() {
+    armPIDController.setReference(-3.75, ControlType.kPosition);
+    //armMotorRight.set(pid.calculate(thru.getAbsolutePosition(), -0.3));
+  }
+
+  public void shooterSetpoint() {
+    armPIDController.setReference(-3, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),-0.36));
+  }
+
+  public void ampSetpoint() {
+     armPIDController.setReference(0.25, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
+  }
+
+    public void trapSetpoint() {
+     armPIDController.setReference(-2, ControlType.kPosition);
+   // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
+  }
+
+  public double getAbsolutePosition() {
+    return thru.getAbsolutePosition();
+  }
+  
+  public void resetEverything() {
+     if (lowerHardStop.get() == false) {
+      thru.reset();
+      armEncoderLeft.setPosition(0);
+      armEncoderRight.setPosition(0);
+      armPIDController.setReference(0, ControlType.kPosition);
+    }
+  }
+
+
 }
 

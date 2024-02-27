@@ -2,18 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.setpoints;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class ArmSetPointCommand extends Command {
+public class TrapSetpoint extends Command {
+  /** Creates a new TrapSetpoint. */
 
-  private final ArmSubsystem m_armSubsystem;
-  /** Creates a new ArmSetPointCommand. */
-  public ArmSetPointCommand(ArmSubsystem armSubsystem) {
-    m_armSubsystem = armSubsystem;
+  public final ArmSubsystem m_armSubsystem;
+
+  public TrapSetpoint(ArmSubsystem armSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_armSubsystem = armSubsystem;
   }
 
   // Called when the command is initially scheduled.
@@ -23,16 +24,13 @@ public class ArmSetPointCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_armSubsystem.valueBoolean() == false) {
-      m_armSubsystem.set(0.15);
-    } else  m_armSubsystem.armOff();
+    m_armSubsystem.trapSetpoint();
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_armSubsystem.armOff();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
