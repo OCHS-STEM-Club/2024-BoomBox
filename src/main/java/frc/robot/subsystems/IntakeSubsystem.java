@@ -28,6 +28,8 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeMotor.setInverted(false);
 
     intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 10);
+    intakeMotor.setSmartCurrentLimit(30,30);
+    
     }
   
 
@@ -40,7 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intakeOn() {
-    intakeMotor.set(0.45);
+    intakeMotor.set(0.4);
   }
 
   public void intakeOff() {

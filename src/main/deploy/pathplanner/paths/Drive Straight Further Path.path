@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0,
+        "x": 0.85,
         "y": 0.0
       },
       "isLocked": false,
@@ -20,7 +20,7 @@
         "y": 0.0
       },
       "prevControl": {
-        "x": -0.15000000000000002,
+        "x": 0.0,
         "y": 0.0
       },
       "nextControl": null,

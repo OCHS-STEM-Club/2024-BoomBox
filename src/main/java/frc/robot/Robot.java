@@ -50,6 +50,7 @@ public class Robot extends LoggedRobot {
 // Logger.disableDeterministicTimestamps() // See "Deterministic Timestamps" in the "Understanding Data Flow" page
 Logger.start(); // Start logging! No more data receivers, replay sources, or metadata values may be added. // Start logging! No more data receivers, replay sources, or metadata values may be added.
 
+  // TODO:Use an FAT32 formatted USB stick in rio
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
