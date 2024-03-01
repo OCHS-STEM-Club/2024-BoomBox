@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -74,6 +75,15 @@ public class ArmSubsystem extends SubsystemBase {
     armPIDController.setD(20);
     armPIDController.setOutputRange(-1, 1);
 
+    armMotorRight.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
+    armMotorRight.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
+    armMotorRight.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 100);
+    armMotorRight.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 100);
+
+    armMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
+    armMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
+    armMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 100);
+    armMotorLeft.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 100);
   }
 
   @Override

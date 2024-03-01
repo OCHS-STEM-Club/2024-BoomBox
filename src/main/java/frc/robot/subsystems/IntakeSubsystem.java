@@ -27,8 +27,13 @@ public class IntakeSubsystem extends SubsystemBase {
     intakeSensor = new DigitalInput(0);
     intakeMotor.setInverted(false);
 
-    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 10);
+    //intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 50);
     intakeMotor.setSmartCurrentLimit(30,30);
+
+    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
+    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
+    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 100);
+    intakeMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 100);
     
     }
   

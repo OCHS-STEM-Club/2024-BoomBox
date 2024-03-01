@@ -11,6 +11,8 @@ import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
+import edu.wpi.first.wpilibj.DataLogManager;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,6 +37,10 @@ public class Robot extends LoggedRobot {
   @Override
   public void robotInit() {
     Logger.recordMetadata("ProjectName", "MyProject"); // Set a metadata value
+
+
+    DataLogManager.start();
+    DriverStation.startDataLog(DataLogManager.getLog());
 
 // if (isReal()) {
 //     Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")

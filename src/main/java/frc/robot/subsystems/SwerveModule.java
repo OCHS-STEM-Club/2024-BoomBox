@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.sensors.CANCoderStatusFrame;
+import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
@@ -12,6 +14,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
+import com.revrobotics.CANSparkLowLevel.PeriodicStatus1;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -47,6 +51,7 @@ public class SwerveModule {
     m_turnMotor = new CANSparkMax(turnMotorID, MotorType.kBrushless);
     m_driveEncoder = m_driveMotor.getEncoder();
     m_turnEncoder = new CANcoder(encoderID);
+    m_turnEncoder.getPosition().setUpdateFrequency(10);
 
     // Drive motor configuration
     m_driveMotor.restoreFactoryDefaults();
@@ -63,6 +68,17 @@ public class SwerveModule {
     m_driveMotor.setIdleMode(IdleMode.kBrake);
 
     m_driveMotor.setSmartCurrentLimit(20, 20);
+
+    m_driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
+    m_turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
+    m_driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
+    m_turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
+    m_driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 100);
+    m_turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 100);
+    m_driveMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 100);
+    m_turnMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 100);
+    
+   
 
     // Turn encoder configuration
     CANcoderConfiguration config = new CANcoderConfiguration();
