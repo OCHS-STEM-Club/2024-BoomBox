@@ -77,7 +77,7 @@ public class RobotContainer {
   DriveTeleopCmd m_driveTeleopCmd = new DriveTeleopCmd(m_swerveSubsystem, m_driverController, m_driveJoystick, m_rotJoystick);
   ArmDownCommand m_armDownCommand = new ArmDownCommand(m_armSubsystem);
   ArmUpCommand m_armUpCommand = new ArmUpCommand(m_armSubsystem);
-  IntakeInCommand m_intakeCommand = new IntakeInCommand(m_intakeSubsystem);
+  IntakeInCommand m_intakeCommand = new IntakeInCommand(m_intakeSubsystem, m_limelightSubsystem);
   IntakeOutCommand m_intakeOutCommand = new IntakeOutCommand(m_intakeSubsystem);
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
   ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
@@ -108,7 +108,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
-    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem, m_limelightSubsystem).withTimeout(3));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
   
 
@@ -261,11 +261,6 @@ public class RobotContainer {
         m_armSubsystem.ArmMove();
     } else m_armSubsystem.armOff();
   }
-
-  public void resetEverything() {
-    m_armSubsystem.resetEverything();
-  }
-
 
 
 }

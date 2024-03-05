@@ -4,12 +4,17 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
+import com.revrobotics.SparkAbsoluteEncoder.Type;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,18 +22,26 @@ import frc.robot.Constants;
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new climberSubsystem. */
   private CANSparkMax climberMotor;
-  private RelativeEncoder climberEncoder;
+  //private SparkMaxAlternateEncoder climberEncoder;
   public boolean climberbool;
+  public DutyCycleEncoder throughBoreEncoder;
+  // public RelativeEncoder throughboreEncoder;
+  // public int kCPR = 8192;
+  // public SparkMaxAlternateEncoder.Type kType = SparkMaxAlternateEncoder.Type.kQuadrature;
 
   public ClimberSubsystem() {
     climberMotor = new CANSparkMax(Constants.ClimberConstants.kClimberMotorID, MotorType.kBrushless);
-    climberEncoder = climberMotor.getEncoder();
+    // climberEncoder = climberMotor.getEncoder();
     climberMotor.setIdleMode(IdleMode.kBrake);
     climberMotor.setInverted(false);
     climberMotor.setSmartCurrentLimit(10, 10);
+    climberMotor.getEncoder();
+    throughBoreEncoder = new DutyCycleEncoder(2);
+    //climberEncoder = climberMotor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature,8192);
+
     //climberMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 50);
 
-    climberEncoder.setPosition(0);
+    //climberEncoder.setPosition(0);
 
     climberMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 100);
     climberMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 100);
@@ -41,18 +54,19 @@ public class ClimberSubsystem extends SubsystemBase {
     // System.out.println(climberEncoder.getPosition());
    // System.out.println(climberbool);
     // This method will be called once per scheduler run
+    System.out.println(throughBoreEncoder.getAbsolutePosition());
   }
 
   public void climberDown() {
-    if (climberEncoder.getPosition() < 20) {
+    //if (throughBoreEncoder.getAbsolutePosition() > 0.48) {
       climberMotor.set(0.98);
-    } else climberMotor.set(0);
+   // } else climberMotor.set(0);
 }
 
   public void climberUp() {
-   if (climberEncoder.getPosition() > 0) {
+   //if (throughBoreEncoder.getAbsolutePosition() < 0.95) {
       climberMotor.set(-0.98);
-    } else climberMotor.set(0);
+   // } else climberMotor.set(0);
   }
 
   public void climberUpOverride() {
@@ -64,7 +78,7 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void jankClimber() {
-    if(climberEncoder.getPosition() < 20) {
+    if(throughBoreEncoder.getAbsolutePosition() < 20) {
       climberDown();
       climberbool = false;
 

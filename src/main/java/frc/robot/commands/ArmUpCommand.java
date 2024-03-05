@@ -29,10 +29,7 @@ public class ArmUpCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_armSubsystem.upperHardStop() == false) {
-      m_armSubsystem.armOff();
-    } else 
-        m_armSubsystem.armMotorUp();
+      m_armSubsystem.armMotorUp();
   }
 
   // Called once the command ends or is interrupted.

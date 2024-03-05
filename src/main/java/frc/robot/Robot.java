@@ -121,7 +121,6 @@ Logger.start(); // Start logging! No more data receivers, replay sources, or met
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.resetEverything();
     //m_armCommand.execute();
   }
 

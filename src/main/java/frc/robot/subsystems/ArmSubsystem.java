@@ -66,8 +66,8 @@ public class ArmSubsystem extends SubsystemBase {
     
     armMotorLeft.follow(armMotorRight);
 
-    lowerHardStop = new DigitalInput(2);
-    upperHardStop = new DigitalInput(1);
+    //lowerHardStop = new DigitalInput(2);
+    //upperHardStop = new DigitalInput(1);
 
     armPIDController = armMotorRight.getPIDController();
 
@@ -97,23 +97,23 @@ public class ArmSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("Built-In Right Encoder", armMotorRight.getEncoder().getPosition());
 
-    if (lowerHardStop.get() == false) {
-      thru.reset();
-      armEncoderLeft.setPosition(0);
-      armEncoderRight.setPosition(0);
-      armPIDController.setReference(0, ControlType.kPosition);
-    }
+    // if (lowerHardStop.get() == false) {
+    //   thru.reset();
+    //   armEncoderLeft.setPosition(0);
+    //   armEncoderRight.setPosition(0);
+    //   armPIDController.setReference(0, ControlType.kPosition);
+    // }
 
 
   }
 
-  public boolean lowerHardStop() {
-    return lowerHardStop.get();
-  }
+  // public boolean lowerHardStop() {
+  //   return lowerHardStop.get();
+  // }
 
-  public boolean upperHardStop() {
-    return upperHardStop.get();
-  }
+  // public boolean upperHardStop() {
+  //   return upperHardStop.get();
+  // }
 
   public void armMotorUp() {
     armMotorRight.set(0.2);
@@ -179,14 +179,14 @@ public class ArmSubsystem extends SubsystemBase {
     return thru.getAbsolutePosition();
   }
   
-  public void resetEverything() {
-     if (lowerHardStop.get() == false) {
-      thru.reset();
-      armEncoderLeft.setPosition(0);
-      armEncoderRight.setPosition(0);
-      armPIDController.setReference(0, ControlType.kPosition);
-    }
-  }
+  // public void resetEverything() {
+  //    if (lowerHardStop.get() == false) {
+  //     thru.reset();
+  //     armEncoderLeft.setPosition(0);
+  //     armEncoderRight.setPosition(0);
+  //     armPIDController.setReference(0, ControlType.kPosition);
+  //   }
+  // }
 
 
 }

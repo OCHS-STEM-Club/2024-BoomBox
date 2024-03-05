@@ -9,6 +9,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.LimelightHelpers;
 
 public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new LimelightSubsystem. */
@@ -99,6 +100,10 @@ public double trackTurn() {
     else {
         return 0;
     }
+}
+
+public void flash() {
+  LimelightHelpers.setLEDMode_ForceBlink("limelight-boombox");
 }
 
 }
