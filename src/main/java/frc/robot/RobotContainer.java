@@ -28,8 +28,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AlignToAprilTagCmd;
 // import frc.robot.autos.exampleAuto;
-import frc.robot.commands.AlignToTagCmd;
 import frc.robot.commands.ArmDownCommand;
 import frc.robot.commands.ArmUpCommand;
 import frc.robot.commands.ClimberDownCommand;
@@ -48,6 +48,7 @@ import frc.robot.commands.setpoints.TrapSetpoint;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -64,6 +65,7 @@ public class RobotContainer {
   IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   
   // Controllers
   public CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverdriveControllerPort);
@@ -79,7 +81,6 @@ public class RobotContainer {
   IntakeOutCommand m_intakeOutCommand = new IntakeOutCommand(m_intakeSubsystem);
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
   ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
-  AlignToTagCmd m_alignToTagCmd = new AlignToTagCmd(m_swerveSubsystem);
   ClimberDownCommand m_climberDownCommand = new ClimberDownCommand(m_climberSubsystem);
   ClimberUpCommand m_climberUpCommand = new ClimberUpCommand(m_climberSubsystem);
   IntakeSetpoint m_intakeSetpoint = new IntakeSetpoint(m_armSubsystem);
@@ -87,6 +88,7 @@ public class RobotContainer {
   AmpSetpoint m_ampSetpoint = new AmpSetpoint(m_armSubsystem);
   TrapSetpoint m_trapSetpoint = new TrapSetpoint(m_armSubsystem);
   ClimberUpOverrideCmd m_climberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
+  AlignToAprilTagCmd m_aligntoAprilTagCmd = new AlignToAprilTagCmd(m_limelightSubsystem);
 
 
 
@@ -185,9 +187,6 @@ public class RobotContainer {
       m_shooterCommand
     );
 
-    m_driverController.b().whileTrue(
-      m_alignToTagCmd
-    );
 
     m_driveJoystick.button(1).whileTrue(
       m_intakeCommand
@@ -199,6 +198,10 @@ public class RobotContainer {
 
     m_rotJoystick.button(3).whileTrue(
       m_IntakeOverrideCommand
+    );
+
+    m_driveJoystick.button(2).whileTrue(
+      m_aligntoAprilTagCmd
     );
   }
 
