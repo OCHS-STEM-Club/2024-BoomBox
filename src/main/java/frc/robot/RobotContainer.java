@@ -86,7 +86,7 @@ public class RobotContainer {
   ShooterSetpoint m_shooterSetpoint = new ShooterSetpoint(m_armSubsystem);
   AmpSetpoint m_ampSetpoint = new AmpSetpoint(m_armSubsystem);
   TrapSetpoint m_trapSetpoint = new TrapSetpoint(m_armSubsystem);
-  ClimberUpOverrideCmd m_ClimberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
+  ClimberUpOverrideCmd m_climberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
 
 
 
@@ -172,7 +172,7 @@ public class RobotContainer {
     );
 
     m_buttonBox.button(10).whileTrue(
-      m_ClimberUpOverrideCmd
+      m_climberUpOverrideCmd
     );
    
     m_buttonBox.leftTrigger().whileTrue(
