@@ -211,4 +211,8 @@ public class SwerveSubsystem extends SubsystemBase {
     m_rearRightModule.stop();
   }
 
+  public void subclassTurndrive(double xSpeed, double ySpeed, double rotSpeed) {
+    drive(xSpeed, ySpeed, rotSpeed, true);
+}
+
 }

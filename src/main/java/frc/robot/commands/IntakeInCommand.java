@@ -6,16 +6,16 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
+// import frc.robot.subsystems.LimelightSubsystem;
 
 public class IntakeInCommand extends Command {
 
   IntakeSubsystem m_intakeSubsystem;
-  LimelightSubsystem m_limelightSubsystem;
+  // LimelightSubsystem m_limelightSubsystem;
   /** Creates a new IntakeCommand. */
-  public IntakeInCommand(IntakeSubsystem intakeSubsystem, LimelightSubsystem limelight) {
+  public IntakeInCommand(IntakeSubsystem intakeSubsystem) {
   m_intakeSubsystem = intakeSubsystem;
-  m_limelightSubsystem = limelight;
+  // m_limelightSubsystem = limelight;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,7 +29,6 @@ public class IntakeInCommand extends Command {
    if (m_intakeSubsystem.beamBreakSensor() == true) {
      m_intakeSubsystem.intakeOn();
    } else  m_intakeSubsystem.intakeOff();
-          m_limelightSubsystem.flash();
    
   }
 

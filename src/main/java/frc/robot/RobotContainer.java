@@ -28,7 +28,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.AlignToAprilTagCmd;
 // import frc.robot.autos.exampleAuto;
 import frc.robot.commands.ArmDownCommand;
 import frc.robot.commands.ArmUpCommand;
@@ -40,6 +39,7 @@ import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeOverrideCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.TestAprilTag;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.commands.setpoints.AmpSetpoint;
 import frc.robot.commands.setpoints.IntakeSetpoint;
@@ -48,7 +48,6 @@ import frc.robot.commands.setpoints.TrapSetpoint;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -65,7 +64,6 @@ public class RobotContainer {
   IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  LimelightSubsystem m_limelightSubsystem = new LimelightSubsystem();
   
   // Controllers
   public CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverdriveControllerPort);
@@ -77,10 +75,10 @@ public class RobotContainer {
   DriveTeleopCmd m_driveTeleopCmd = new DriveTeleopCmd(m_swerveSubsystem, m_driverController, m_driveJoystick, m_rotJoystick);
   ArmDownCommand m_armDownCommand = new ArmDownCommand(m_armSubsystem);
   ArmUpCommand m_armUpCommand = new ArmUpCommand(m_armSubsystem);
-  IntakeInCommand m_intakeCommand = new IntakeInCommand(m_intakeSubsystem, m_limelightSubsystem);
+  IntakeInCommand m_intakeCommand = new IntakeInCommand(m_intakeSubsystem);
   IntakeOutCommand m_intakeOutCommand = new IntakeOutCommand(m_intakeSubsystem);
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
-  ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem);
+  ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem,m_armSubsystem);
   ClimberDownCommand m_climberDownCommand = new ClimberDownCommand(m_climberSubsystem);
   ClimberUpCommand m_climberUpCommand = new ClimberUpCommand(m_climberSubsystem);
   IntakeSetpoint m_intakeSetpoint = new IntakeSetpoint(m_armSubsystem);
@@ -88,7 +86,7 @@ public class RobotContainer {
   AmpSetpoint m_ampSetpoint = new AmpSetpoint(m_armSubsystem);
   TrapSetpoint m_trapSetpoint = new TrapSetpoint(m_armSubsystem);
   ClimberUpOverrideCmd m_climberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
-  AlignToAprilTagCmd m_aligntoAprilTagCmd = new AlignToAprilTagCmd(m_limelightSubsystem);
+  TestAprilTag m_testAprilTag = new TestAprilTag(m_swerveSubsystem);
 
 
 
@@ -108,7 +106,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
-    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem, m_limelightSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
   
 
@@ -187,6 +185,10 @@ public class RobotContainer {
       m_shooterCommand
     );
 
+    m_rotJoystick.button(1).whileTrue(
+      m_testAprilTag
+    );
+
 
     m_driveJoystick.button(1).whileTrue(
       m_intakeCommand
@@ -200,9 +202,14 @@ public class RobotContainer {
       m_IntakeOverrideCommand
     );
 
+    // m_driveJoystick.button(2).whileFalse(
+    //   m_driveTeleopCmd
+    // );
+
     m_driveJoystick.button(2).whileTrue(
-      m_aligntoAprilTagCmd
-    );
+      m_testAprilTag
+      );
+
   }
 
   /**
@@ -261,8 +268,6 @@ public class RobotContainer {
         m_armSubsystem.ArmMove();
     } else m_armSubsystem.armOff();
   }
-
-
 }
 
   

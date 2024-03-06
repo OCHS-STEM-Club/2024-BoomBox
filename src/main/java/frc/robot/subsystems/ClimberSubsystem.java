@@ -54,7 +54,7 @@ public class ClimberSubsystem extends SubsystemBase {
     // System.out.println(climberEncoder.getPosition());
    // System.out.println(climberbool);
     // This method will be called once per scheduler run
-    System.out.println(throughBoreEncoder.getAbsolutePosition());
+    // System.out.println(throughBoreEncoder.getAbsolutePosition());
   }
 
   public void climberDown() {
