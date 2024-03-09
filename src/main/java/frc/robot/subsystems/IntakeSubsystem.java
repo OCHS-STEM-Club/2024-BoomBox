@@ -15,6 +15,7 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.LimelightHelpers;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
@@ -60,5 +61,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public boolean beamBreakSensor() {
     return intakeSensor.get();
+  }
+
+  public void blink(){
+    // LimelightHelpers.setLEDMode_ForceBlink("limlight - boombox")
   }
 }

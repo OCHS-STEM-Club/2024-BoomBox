@@ -40,6 +40,7 @@ public class TestAprilTag extends Command {
     double targetX = m_limelighTable.getEntry("tx").getDouble(0);
     // double targetY = m_limelighTable.getEntry("tY").getDouble(0);
     // SmartDashboard.putNumber("tx", targetX);
+    // NetworkTableInstance.getDefault().getTable("<limelight-boombox>").getEntry("priorityid").setNumber(7);
 
     m_SwerveSubsystem.drive(0, 0, -m_yawPidController.calculate(targetX,0));
   }

@@ -11,20 +11,7 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "9,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
-              "_title": "limelight_PipelineName",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,0": {
+          "0,0": {
             "size": [
               1,
               1
@@ -37,20 +24,7 @@
               "_showGlyph": false
             }
           },
-          "5,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight_Stream",
-              "_title": "limelight_Stream",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,1": {
+          "0,1": {
             "size": [
               2,
               1
@@ -183,7 +157,7 @@
               "Visuals/Show Outside Circles": false
             }
           },
-          "4,0": {
+          "1,0": {
             "size": [
               1,
               1
@@ -222,7 +196,7 @@
               "_showGlyph": false
             }
           },
-          "5,2": {
+          "5,3": {
             "size": [
               1,
               1
@@ -235,40 +209,7 @@
               "_showGlyph": false
             }
           },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Built-In Right Encoder",
-              "_title": "Built-In Right Encoder",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "0,0": {
-            "size": [
-              3,
-              2
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_title": "Camera Stream",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
-            }
-          },
-          "9,0": {
+          "5,2": {
             "size": [
               1,
               1
@@ -320,20 +261,41 @@
               "_showGlyph": false
             }
           },
-          "6,3": {
+          "2,0": {
+            "size": [
+              3,
+              2
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://limelight-boombox",
+              "_title": "limelight-boombox",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "9,0": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Distance to Hub",
-              "_title": "Distance to Hub",
+              "_source0": "network_table:///SmartDashboard/Built-In Right Encoder",
+              "_title": "Built-In Right Encoder",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "7,3": {
+          "9,1": {
             "size": [
               1,
               1
@@ -346,20 +308,7 @@
               "_showGlyph": false
             }
           },
-          "8,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/limelight-boombox_PipelineName",
-              "_title": "limelight-boombox_PipelineName",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,3": {
+          "9,2": {
             "size": [
               1,
               1
@@ -368,6 +317,19 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/limelight-boombox_Stream",
               "_title": "limelight-boombox_Stream",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/limelight-boombox_PipelineName",
+              "_title": "limelight-boombox_PipelineName",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -390,9 +352,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.800000011920929,
-    "y": 0.800000011920929,
-    "width": 1534.4000244140625,
-    "height": 814.4000244140625
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 830.4000244140625
   }
 }

@@ -11,8 +11,9 @@ import com.revrobotics.CANSparkLowLevel.PeriodicFrame;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.SparkMaxAlternateEncoder;
-import com.revrobotics.SparkMaxPIDController;
+// import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkPIDController;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -33,6 +34,8 @@ public class ArmSubsystem extends SubsystemBase {
   private DigitalInput lowerHardStop;
   private DigitalInput upperHardStop;
   private boolean atshootervalue;
+  // private SparkAbsoluteEncoder throughboreAbsoluteEncoder;
+
 
   private DutyCycleEncoder thru;
 
@@ -58,6 +61,8 @@ public class ArmSubsystem extends SubsystemBase {
     armMotorRight.setIdleMode(IdleMode.kBrake);
     armMotorLeft.setInverted(false);
     armMotorRight.setInverted(false);
+
+    // throughboreAbsoluteEncoder = armMotorLeft.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
     // armMotorRight.setSmartCurrentLimit(30, 15);
     // armMotorLeft.setSmartCurrentLimit(30, 15);
 
@@ -70,6 +75,8 @@ public class ArmSubsystem extends SubsystemBase {
     //upperHardStop = new DigitalInput(1);
 
     armPIDController = armMotorRight.getPIDController();
+
+    // armPIDController.setFeedbackDevice(throughboreAbsoluteEncoder);
 
     armPIDController.setP(0.85);
     armPIDController.setD(20);

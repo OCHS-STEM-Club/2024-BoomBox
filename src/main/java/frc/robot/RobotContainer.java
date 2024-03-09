@@ -32,6 +32,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArmDownCommand;
 import frc.robot.commands.ArmUpCommand;
 import frc.robot.commands.ClimberDownCommand;
+import frc.robot.commands.ClimberDownOverrideCmd;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ClimberUpOverrideCmd;
 import frc.robot.commands.DriveTeleopCmd;
@@ -87,6 +88,7 @@ public class RobotContainer {
   TrapSetpoint m_trapSetpoint = new TrapSetpoint(m_armSubsystem);
   ClimberUpOverrideCmd m_climberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
   TestAprilTag m_testAprilTag = new TestAprilTag(m_swerveSubsystem);
+  ClimberDownOverrideCmd m_ClimberDownOverrideCmd = new ClimberDownOverrideCmd(m_climberSubsystem);
 
 
 
@@ -102,7 +104,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shooter On", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.4)));
     NamedCommands.registerCommand("Shooter On (IamSPED)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.5)));
     NamedCommands.registerCommand("Shooter Off", Commands.runOnce(() -> m_shooterSubsystem.shooterOff()));
-    NamedCommands.registerCommand("Climber down", Commands.runOnce(() -> m_climberSubsystem.jankClimber()));
+    // NamedCommands.registerCommand("Climber down", Commands.runOnce(() -> m_climberSubsystem.jankClimber()));
     NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
@@ -144,19 +146,19 @@ public class RobotContainer {
 
     // Button Box controls
     m_buttonBox.pov(0).whileTrue(
-      m_armUpCommand
+      m_climberUpCommand
     );
 
     m_buttonBox.pov(180).whileTrue(
-      m_armDownCommand
-    );
-
-    m_buttonBox.button(1).whileTrue(
       m_climberDownCommand
     );
 
+    m_buttonBox.button(1).whileTrue(
+      m_armDownCommand
+    );
+
     m_buttonBox.button(3).whileTrue(
-      m_climberUpCommand
+      m_armUpCommand
     );
 
     m_buttonBox.button(4).whileTrue(
@@ -173,6 +175,10 @@ public class RobotContainer {
 
     m_buttonBox.button(10).whileTrue(
       m_climberUpOverrideCmd
+    );
+
+    m_buttonBox.button(9).whileTrue(
+      m_ClimberDownOverrideCmd
     );
    
     m_buttonBox.leftTrigger().whileTrue(
@@ -226,7 +232,7 @@ public class RobotContainer {
     // Load the path you want to follow using its name in the GUI
 
 
-    m_swerveSubsystem.resetPose();
+    // m_swerveSubsystem.resetPose();
     // // Create a path following command using AutoBuilder. This will also trigger event markers.
     // return AutoBuilder.followPath(path);
     //return autoChooser.getSelected();
@@ -250,9 +256,9 @@ public class RobotContainer {
     m_armSubsystem.armCoastMode();
   }
 
-  public void dumdumClimber() {
-    m_climberSubsystem.jankClimber();
-  }
+  // public void dumdumClimber() {
+  //   m_climberSubsystem.jankClimber();
+  // }
 
   // public boolean isClimberdown()  {
   //   return m_climberSubsystem.isClimberdown();
@@ -262,12 +268,12 @@ public class RobotContainer {
   //   m_armSubsystem.ArmMove();
   // }
 
-  public void armDownAuto() {
-    m_climberSubsystem.jankClimber();
-    if (m_climberSubsystem.isClimberdown() == true) {
-        m_armSubsystem.ArmMove();
-    } else m_armSubsystem.armOff();
-  }
+  // public void armDownAuto() {
+  //   m_climberSubsystem.jankClimber();
+  //   if (m_climberSubsystem.isClimberdown() == true) {
+  //       m_armSubsystem.ArmMove();
+  //   } else m_armSubsystem.armOff();
+  // }
 }
 
   

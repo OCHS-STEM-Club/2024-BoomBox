@@ -36,11 +36,11 @@ public class Robot extends LoggedRobot {
    */
   @Override
   public void robotInit() {
-    Logger.recordMetadata("ProjectName", "MyProject"); // Set a metadata value
+    // Logger.recordMetadata("2024-BoomBox", "MyProject"); // Set a metadata value
 
 
-    DataLogManager.start();
-    DriverStation.startDataLog(DataLogManager.getLog());
+    // DataLogManager.start();
+    // DriverStation.startDataLog(DataLogManager.getLog());
 
 // if (isReal()) {
 //     Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")
@@ -90,7 +90,7 @@ Logger.start(); // Start logging! No more data receivers, replay sources, or met
   @Override
   public void autonomousInit() {
     m_robotContainer.resetGyro();
-    m_robotContainer.resetPose();
+    // m_robotContainer.resetPose();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -103,7 +103,7 @@ Logger.start(); // Start logging! No more data receivers, replay sources, or met
   @Override
   public void autonomousPeriodic() {
     // m_robotContainer.armDownAuto();
-     m_robotContainer.dumdumClimber();
+    //  m_robotContainer.dumdumClimber();
   }
 
   @Override

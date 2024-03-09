@@ -49,11 +49,22 @@ private ArmSubsystem m_armSubsystem;
       m_shooterSubsystem.shooterOn(0.45);
       m_armSubsystem.setReference(-2.1);
     } 
+
+    if (YValue < 15 && YValue > 10) {
+      m_shooterSubsystem.shooterOn(0.45);
+      m_armSubsystem.setReference(-2.1);
+    }
+
+    if (YValue < 10 && YValue > 5) {
+      m_shooterSubsystem.shooterOn(0.45);
+      m_armSubsystem.setReference(-1.9);
+    }
     
     if (YValue == 0) {
       m_shooterSubsystem.shooterOn(0.4);
-      m_armSubsystem.setReference(-3);
-  }
+      // m_armSubsystem.setReference(-3);
+  } 
+  
 
 }
 

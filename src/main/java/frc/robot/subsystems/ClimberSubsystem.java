@@ -22,7 +22,7 @@ import frc.robot.Constants;
 public class ClimberSubsystem extends SubsystemBase {
   /** Creates a new climberSubsystem. */
   private CANSparkMax climberMotor;
-  //private SparkMaxAlternateEncoder climberEncoder;
+  private RelativeEncoder climberEncoder;
   public boolean climberbool;
   public DutyCycleEncoder throughBoreEncoder;
   // public RelativeEncoder throughboreEncoder;
@@ -31,7 +31,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public ClimberSubsystem() {
     climberMotor = new CANSparkMax(Constants.ClimberConstants.kClimberMotorID, MotorType.kBrushless);
-    // climberEncoder = climberMotor.getEncoder();
+    climberEncoder = climberMotor.getEncoder();
     climberMotor.setIdleMode(IdleMode.kBrake);
     climberMotor.setInverted(false);
     climberMotor.setSmartCurrentLimit(10, 10);
@@ -52,39 +52,43 @@ public class ClimberSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // System.out.println(climberEncoder.getPosition());
-   // System.out.println(climberbool);
+  //  System.out.println(climberEncoder.getPosition());
     // This method will be called once per scheduler run
     // System.out.println(throughBoreEncoder.getAbsolutePosition());
   }
 
   public void climberDown() {
-    //if (throughBoreEncoder.getAbsolutePosition() > 0.48) {
+    if (climberEncoder.getPosition() <= 0 ) {
       climberMotor.set(0.98);
-   // } else climberMotor.set(0);
+   } else climberMotor.set(0);
 }
 
   public void climberUp() {
-   //if (throughBoreEncoder.getAbsolutePosition() < 0.95) {
+   if (climberEncoder.getPosition() >= -23) {
       climberMotor.set(-0.98);
-   // } else climberMotor.set(0);
+    } else climberMotor.set(0);
   }
 
   public void climberUpOverride() {
   climberMotor.set(-0.8);
   }
 
+  public void climberDownOverride() {
+  climberMotor.set(0.8);
+  }
+
   public void climberOff() {
     climberMotor.set(0);
   }
 
-  public void jankClimber() {
-    if(throughBoreEncoder.getAbsolutePosition() < 20) {
-      climberDown();
-      climberbool = false;
+  // public void jankClimber() {
+  //   if(throughBoreEncoder.getAbsolutePosition() < 20) {
+  //     climberDown();
+  //     climberbool = false;
 
-    } else climberOff();
-      climberbool = true;
-  }
+  //   } else climberOff();
+  //     climberbool = true;
+  // }
 
   public boolean isClimberdown() {
     if(climberbool == true) {

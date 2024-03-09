@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.subsystems.LimelightSubsystem;
 
@@ -28,7 +29,20 @@ public class IntakeInCommand extends Command {
   public void execute() {
    if (m_intakeSubsystem.beamBreakSensor() == true) {
      m_intakeSubsystem.intakeOn();
+     LimelightHelpers.setLEDMode_ForceOff("limelight-boombox");
    } else  m_intakeSubsystem.intakeOff();
+        LimelightHelpers.setLEDMode_ForceBlink("limelight-boombox");
+
+  if (m_intakeSubsystem.beamBreakSensor() == true) {
+     m_intakeSubsystem.intakeOn();
+     LimelightHelpers.setLEDMode_ForceOff("limelight-boombox");
+   } else if (m_intakeSubsystem.beamBreakSensor() == false) {
+    m_intakeSubsystem.intakeOff();
+    LimelightHelpers.setLEDMode_ForceBlink("limelight-boombox");
+    
+   }
+   
+        
    
   }
 
@@ -36,6 +50,7 @@ public class IntakeInCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     m_intakeSubsystem.intakeOff();
+    LimelightHelpers.setLEDMode_ForceOff("limelight-boombox");
   }
 
   // Returns true when the command should end.
