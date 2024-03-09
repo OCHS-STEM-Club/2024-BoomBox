@@ -36,11 +36,11 @@ public class Robot extends LoggedRobot {
    */
   @Override
   public void robotInit() {
-    // Logger.recordMetadata("2024-BoomBox", "MyProject"); // Set a metadata value
+//     Logger.recordMetadata("2024-BoomBox", "MyProject"); // Set a metadata value
 
 
-    // DataLogManager.start();
-    // DriverStation.startDataLog(DataLogManager.getLog());
+//     DataLogManager.start();
+//     DriverStation.startDataLog(DataLogManager.getLog());
 
 // if (isReal()) {
 //     Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")

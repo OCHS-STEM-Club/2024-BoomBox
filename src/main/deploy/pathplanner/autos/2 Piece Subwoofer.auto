@@ -68,6 +68,12 @@
                 "data": {
                   "name": "Intake in BB"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Reset Pose"
+                }
               }
             ]
           }
@@ -82,12 +88,6 @@
           "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Drive Straight Back"
-                }
-              },
               {
                 "type": "named",
                 "data": {
@@ -107,6 +107,12 @@
           "type": "wait",
           "data": {
             "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Drive Straight Back"
           }
         },
         {

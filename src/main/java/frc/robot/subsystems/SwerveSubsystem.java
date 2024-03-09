@@ -33,6 +33,8 @@ import frc.robot.Constants.DriveConstants;
 
 public class SwerveSubsystem extends SubsystemBase {
 
+ // public SwerveDriveKinematics kinematics;
+
   // private final SwerveModule m_frontLeftModule = new SwerveModule(
   //   DriveConstants.kFrontLeftDriveID, DriveConstants.kFrontLeftTurnID, DriveConstants.kFrontLeftEncoderID, DriveConstants.kFrontLeftDriveInverted, "FL");
   // private final SwerveModule m_frontRightModule = new SwerveModule(

@@ -112,8 +112,8 @@ public final class Constants {
 
     public static final HolonomicPathFollowerConfig kHolonomicPathFollowerConfig = new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
       new PIDConstants(0.0001, 0.0, 0.0), // Translation PID constants
-      new PIDConstants(0.0006, 0.0, 0.0), // Rotation PID constants
-      3.81, // Max module speed, in m/s
+      new PIDConstants(0.005, 0.0, 0.0), // Rotation PID constants
+      3, // Max module speed, in m/s
       0.44, // Drive base radius in meters. Distance from robot center to furthest module.
       new ReplanningConfig() // Default path replanning config. See the API for the options here
     );
@@ -143,4 +143,6 @@ public final class Constants {
   public static class ClimberConstants {
     public static final int kClimberMotorID = 23;
   }
+
+
 }

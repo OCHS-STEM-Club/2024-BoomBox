@@ -110,10 +110,12 @@ public class RobotContainer {
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
-  
-
-
-
+    NamedCommands.registerCommand("Reset Pose", Commands.runOnce(() -> m_swerveSubsystem.resetPose()));
+    NamedCommands.registerCommand("Test April Tag", new TestAprilTag(m_swerveSubsystem).withTimeout(2));
+    NamedCommands.registerCommand("Shooter Command", new ShooterCommand(m_shooterSubsystem, m_armSubsystem));
+    NamedCommands.registerCommand("Two Piece Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.15)));
+    NamedCommands.registerCommand("Shooter Speed", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.44)));
+    
     m_swerveSubsystem.setDefaultCommand(m_driveTeleopCmd);
 
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -228,17 +230,18 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // return new PathPlannerAuto("Auto1");
+    // PathPlannerPath path = PathPlannerPath.fromPathFile("Turning");
+    // m_swerveSubsystem.resetPose(path.getPreviewStartingHolonomicPose());
+
     //autoChooser = AutoBuilder.buildAutoChooser();
     // Load the path you want to follow using its name in the GUI
 
-
-    // m_swerveSubsystem.resetPose();
     // // Create a path following command using AutoBuilder. This will also trigger event markers.
     // return AutoBuilder.followPath(path);
     //return autoChooser.getSelected();
     return autoChooser.getSelected();
-   
   }
+
 
   public void resetGyro() {
     m_swerveSubsystem.resetHeading();
@@ -274,6 +277,7 @@ public class RobotContainer {
   //       m_armSubsystem.ArmMove();
   //   } else m_armSubsystem.armOff();
   // }
+
 }
 
   
