@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterCommand extends Command {
+public class ShooterCommandAuto extends Command {
   /** Creates a new ShooterCommand. */
 
 private ShooterSubsystem m_shooterSubsystem;
@@ -18,7 +18,7 @@ private ArmSubsystem m_armSubsystem;
   private final NetworkTableInstance m_inst = NetworkTableInstance.getDefault();
   private final NetworkTable m_limelighTable;
 
-  public ShooterCommand(ShooterSubsystem shooterSubsystem, ArmSubsystem armSubsystem) {
+  public ShooterCommandAuto(ShooterSubsystem shooterSubsystem, ArmSubsystem armSubsystem) {
   m_shooterSubsystem = shooterSubsystem;
   m_armSubsystem = armSubsystem;
   m_limelighTable = m_inst.getTable("limelight-boombox");
@@ -138,7 +138,7 @@ private ArmSubsystem m_armSubsystem;
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.shooterOff();
+   // m_shooterSubsystem.shooterOff();
   }
 
   // Returns true when the command should end.

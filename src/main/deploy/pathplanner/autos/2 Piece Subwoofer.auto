@@ -68,12 +68,6 @@
                 "data": {
                   "name": "Intake in BB"
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Reset Pose"
-                }
               }
             ]
           }
@@ -81,7 +75,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
@@ -91,13 +85,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Arm to Shooter"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter On"
+                  "name": "Test April Tag"
                 }
               }
             ]
@@ -106,13 +94,38 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Drive Straight Back"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "DriveTag"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter Command"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Test April Tag"
           }
         },
         {
@@ -124,19 +137,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooter Off"
+            "waitTime": 1.0
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Intake Off"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter Off"
           }
         }
       ]

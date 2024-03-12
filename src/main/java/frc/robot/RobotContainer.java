@@ -16,6 +16,8 @@ import com.revrobotics.CANSparkBase.ControlType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -35,11 +37,13 @@ import frc.robot.commands.ClimberDownCommand;
 import frc.robot.commands.ClimberDownOverrideCmd;
 import frc.robot.commands.ClimberUpCommand;
 import frc.robot.commands.ClimberUpOverrideCmd;
+import frc.robot.commands.DriveStraightTagCmd;
 import frc.robot.commands.DriveTeleopCmd;
 import frc.robot.commands.IntakeInCommand;
 import frc.robot.commands.IntakeOutCommand;
 import frc.robot.commands.IntakeOverrideCommand;
-import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ShooterCommandAuto;
+import frc.robot.commands.ShooterCommandTeleop;
 import frc.robot.commands.TestAprilTag;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.commands.setpoints.AmpSetpoint;
@@ -79,7 +83,8 @@ public class RobotContainer {
   IntakeInCommand m_intakeCommand = new IntakeInCommand(m_intakeSubsystem);
   IntakeOutCommand m_intakeOutCommand = new IntakeOutCommand(m_intakeSubsystem);
   IntakeOverrideCommand m_IntakeOverrideCommand = new IntakeOverrideCommand(m_intakeSubsystem);
-  ShooterCommand m_shooterCommand = new ShooterCommand(m_shooterSubsystem,m_armSubsystem);
+  ShooterCommandAuto m_shooterCommandAuto = new ShooterCommandAuto(m_shooterSubsystem,m_armSubsystem);
+  ShooterCommandTeleop m_shooterCommand = new ShooterCommandTeleop(m_shooterSubsystem, m_armSubsystem);
   ClimberDownCommand m_climberDownCommand = new ClimberDownCommand(m_climberSubsystem);
   ClimberUpCommand m_climberUpCommand = new ClimberUpCommand(m_climberSubsystem);
   IntakeSetpoint m_intakeSetpoint = new IntakeSetpoint(m_armSubsystem);
@@ -91,8 +96,9 @@ public class RobotContainer {
   ClimberDownOverrideCmd m_ClimberDownOverrideCmd = new ClimberDownOverrideCmd(m_climberSubsystem);
 
 
-
-  // Autos
+  // private final NetworkTableInstance m_inst = NetworkTableInstance.getDefault();
+  // private final NetworkTable m_limelighTable;
+  // // Autos
   //exampleAuto m_exampleAuto = new exampleAuto(m_swerveSubsystem);
 
   private final SendableChooser<Command> autoChooser;
@@ -111,17 +117,19 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Reset Pose", Commands.runOnce(() -> m_swerveSubsystem.resetPose()));
-    NamedCommands.registerCommand("Test April Tag", new TestAprilTag(m_swerveSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("Shooter Command", new ShooterCommand(m_shooterSubsystem, m_armSubsystem));
-    NamedCommands.registerCommand("Two Piece Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.15)));
+    NamedCommands.registerCommand("Test April Tag", new TestAprilTag(m_swerveSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("Shooter Command", new ShooterCommandAuto(m_shooterSubsystem, m_armSubsystem).withTimeout(2));
+    NamedCommands.registerCommand("Two Piece Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.135)));
     NamedCommands.registerCommand("Shooter Speed", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.44)));
+    NamedCommands.registerCommand("DriveTag", new DriveStraightTagCmd(m_swerveSubsystem).withTimeout(3));
     
     m_swerveSubsystem.setDefaultCommand(m_driveTeleopCmd);
 
     autoChooser = AutoBuilder.buildAutoChooser();
     autoChooser.addOption("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
-
+    // m_limelighTable = m_inst.getTable("limelight-boombox");
     SmartDashboard.putData("Autos", autoChooser);
+    // SmartDashboard.putData(m_limelighTable.getDeafa);
     
 
     // Configure the trigger bindings
