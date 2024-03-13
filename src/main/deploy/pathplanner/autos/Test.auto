@@ -6,9 +6,9 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Drive Straight Tag"
+            "pathName": "Test"
           }
         }
       ]

@@ -42,6 +42,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Shooter Off"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -73,16 +79,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Tag Yaw Alignment"
-                }
-              }
-            ]
+            "name": "Tag Yaw Alignment"
           }
         },
         {
@@ -92,22 +91,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Drive Straight Back Tag"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Tag Arm/Shooter Alignment"
-                }
-              }
-            ]
+            "name": "Drive Straight Back Tag"
           }
         },
         {
@@ -120,6 +106,18 @@
           "type": "named",
           "data": {
             "name": "Tag Yaw Alignment"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Tag Arm/Shooter Alignment"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
           }
         },
         {

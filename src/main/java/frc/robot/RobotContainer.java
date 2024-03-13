@@ -33,7 +33,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.DriveTeleopCmd;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.commands.AprilTag.DriveStraightBackTagCmd;
-import frc.robot.commands.AprilTag.DriveStraightTagCmd;
+// import frc.robot.commands.AprilTag.DriveStraightTagCmd;
 import frc.robot.commands.AprilTag.TestAprilTag;
 import frc.robot.commands.Arm.ArmDownCommand;
 import frc.robot.commands.Arm.ArmUpCommand;
@@ -113,15 +113,15 @@ public class RobotContainer {
     NamedCommands.registerCommand("Turn 90 Cmd", new TurnToAngle(m_swerveSubsystem, 90, false));
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
-    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(2));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Reset Pose", Commands.runOnce(() -> m_swerveSubsystem.resetPose()));
     NamedCommands.registerCommand("Tag Yaw Alignment", new TestAprilTag(m_swerveSubsystem).withTimeout(1));
     NamedCommands.registerCommand("Tag Arm/Shooter Alignment", new ShooterCommandAuto(m_shooterSubsystem, m_armSubsystem).withTimeout(2));
     NamedCommands.registerCommand("Two Piece Arm Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.135)));
     NamedCommands.registerCommand("Shooter on (44)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.44)));
-    NamedCommands.registerCommand("Drive Straight Back Tag", new DriveStraightBackTagCmd(m_swerveSubsystem).withTimeout(3));
-    NamedCommands.registerCommand("Drive Straight Tag", new DriveStraightTagCmd(m_swerveSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Drive Straight Back Tag", new DriveStraightBackTagCmd(m_swerveSubsystem).withTimeout(1));
+    // NamedCommands.registerCommand("Drive Straight Tag", new DriveStraightTagCmd(m_swerveSubsystem).withTimeout(3));
     
     m_swerveSubsystem.setDefaultCommand(m_driveTeleopCmd);
 

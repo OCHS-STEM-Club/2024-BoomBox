@@ -88,6 +88,10 @@ private ArmSubsystem m_armSubsystem;
       m_shooterSubsystem.shooterOn(0.44);
       m_armSubsystem.setReference(-2.1);
     }
+    if(YValue <= 10) {
+      m_shooterSubsystem.shooterOn(0.4);
+    }
+
     // if(YValue < 10 && YValue > 9) {
     //   m_shooterSubsystem.shooterOn(0.44);
     //   m_armSubsystem.setReference(-1.95);
