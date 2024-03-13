@@ -55,10 +55,10 @@ public final class Constants {
     public static final int kRearRightEncoderID = 9;
 
     // CANCoder magnetic offsets
-    public static final double kFrontLeftMagneticOffset = 0.088379; //0.084717; //0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
-    public static final double kFrontRightMagneticOffset = 0.154541; //0.162598; //-0.379639; //Version 1: 0.163086
-    public static final double kRearLeftMagneticOffset = -0.357178; //-0.370605; //-0.055664; //Version 1: -0.362793
-    public static final double kRearRightMagneticOffset = 0.284180; //0.277832; //Version 1: 0.296387
+    public static final double kFrontLeftMagneticOffset = 0.085693; //0.088379; //0.084717; //0.100586; //0.074951; //0.139404; //0.215332; //0.423584; //Version 1: 0.086670
+    public static final double kFrontRightMagneticOffset = 0.153564; //0.154541; //0.162598; //-0.379639; //Version 1: 0.163086
+    public static final double kRearLeftMagneticOffset = -0.356201; //-0.370605; //-0.055664; //Version 1: -0.362793
+    public static final double kRearRightMagneticOffset = 0.284912; //0.277832; //Version 1: 0.296387
 
     // Motor inversions
     public static final boolean kFrontLeftDriveInverted = true;
@@ -88,7 +88,7 @@ public final class Constants {
     public static final double kTurnD = 0;
 
     // Motor conversion factors
-    public static final double kDriveEncoderPositionFactor = 0.0434782608695652;
+    public static final double kDriveEncoderPositionFactor = 0.03936639443;
     public static final double kDriveEncoderVelocityFactor = kDriveEncoderPositionFactor / 60.0;
   }
 

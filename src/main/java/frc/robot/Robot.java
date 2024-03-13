@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ArmUpCommand;
+// import frc.robot.commands.ArmUpCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -36,22 +36,22 @@ public class Robot extends LoggedRobot {
    */
   @Override
   public void robotInit() {
-    Logger.recordMetadata("2024-BoomBox", "MyProject"); // Set a metadata value
+    //Logger.recordMetadata("2024-BoomBox", "MyProject"); // Set a metadata value
 
 
     // DataLogManager.start();
     // DriverStation.startDataLog(DataLogManager.getLog());
 
-if (isReal()) {
-    Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")
-    Logger.addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
-    new PowerDistribution(1, ModuleType.kRev); // Enables power distribution logging
-} else {
-    setUseTiming(false); // Run as fast as possible
-    String logPath = LogFileUtil.findReplayLog(); // Pull the replay log from AdvantageScope (or prompt the user)
-    Logger.setReplaySource(new WPILOGReader(logPath)); // Read replay log
-    Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim"))); // Save outputs to a new log
-}
+// if (isReal()) {
+//     Logger.addDataReceiver(new WPILOGWriter()); // Log to a USB stick ("/U/logs")
+//     Logger.addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
+//     new PowerDistribution(1, ModuleType.kRev); // Enables power distribution logging
+// } else {
+//     setUseTiming(false); // Run as fast as possible
+//     String logPath = LogFileUtil.findReplayLog(); // Pull the replay log from AdvantageScope (or prompt the user)
+//     Logger.setReplaySource(new WPILOGReader(logPath)); // Read replay log
+//     Logger.addDataReceiver(new WPILOGWriter(LogFileUtil.addPathSuffix(logPath, "_sim"))); // Save outputs to a new log
+// }
 
 // Logger.disableDeterministicTimestamps() // See "Deterministic Timestamps" in the "Understanding Data Flow" page
 Logger.start(); // Start logging! No more data receivers, replay sources, or metadata values may be added. // Start logging! No more data receivers, replay sources, or metadata values may be added.

@@ -1,39 +1,20 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "rotation": 0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 1.0
+            "name": "Arm to Shooter"
           }
         },
         {
-          "type": "parallel",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter On"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Arm to Shooter"
-                }
-              }
-            ]
+            "name": "Shooter On"
           }
         },
         {
@@ -51,13 +32,13 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Arm to Intake"
+            "name": "Intake Off"
           }
         },
         {
@@ -73,7 +54,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Drive Straight"
+                  "pathName": "Scooch"
                 }
               },
               {
@@ -86,15 +67,9 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Test April Tag"
-          }
-        },
-        {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
           }
         },
         {
@@ -104,13 +79,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Two Piece Setpoint"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shooter Speed"
+                  "name": "Tag Yaw Alignment"
                 }
               }
             ]
@@ -119,7 +88,38 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Drive Straight Back Tag"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Tag Arm/Shooter Alignment"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Tag Yaw Alignment"
           }
         },
         {
@@ -131,19 +131,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooter Off"
+            "waitTime": 1.0
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Intake Off"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter Off"
           }
         }
       ]

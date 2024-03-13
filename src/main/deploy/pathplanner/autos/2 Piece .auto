@@ -1,26 +1,33 @@
 {
   "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 0.0,
-      "y": 0.0
-    },
-    "rotation": 0
-  },
+  "startingPose": null,
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "Arm to Shooter"
+            "waitTime": 1.0
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Shooter On"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter On"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm to Shooter"
+                }
+              }
+            ]
           }
         },
         {
@@ -38,13 +45,13 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 1.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Intake Off"
+            "name": "Arm to Intake"
           }
         },
         {
@@ -73,9 +80,15 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Tag Yaw Alignment"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 1.0
           }
         },
         {
@@ -85,53 +98,16 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Test April Tag"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "DriveTag"
+                  "name": "Two Piece Arm Setpoint"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Shooter Command"
+                  "name": "Shooter on (44)"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Test April Tag"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intake In"
           }
         },
         {
@@ -143,13 +119,25 @@
         {
           "type": "named",
           "data": {
-            "name": "Intake Off"
+            "name": "Intake In"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 2.0
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Shooter Off"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake Off"
           }
         }
       ]

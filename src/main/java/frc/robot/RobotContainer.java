@@ -30,22 +30,22 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-// import frc.robot.autos.exampleAuto;
-import frc.robot.commands.ArmDownCommand;
-import frc.robot.commands.ArmUpCommand;
-import frc.robot.commands.ClimberDownCommand;
-import frc.robot.commands.ClimberDownOverrideCmd;
-import frc.robot.commands.ClimberUpCommand;
-import frc.robot.commands.ClimberUpOverrideCmd;
-import frc.robot.commands.DriveStraightTagCmd;
 import frc.robot.commands.DriveTeleopCmd;
-import frc.robot.commands.IntakeInCommand;
-import frc.robot.commands.IntakeOutCommand;
-import frc.robot.commands.IntakeOverrideCommand;
-import frc.robot.commands.ShooterCommandAuto;
-import frc.robot.commands.ShooterCommandTeleop;
-import frc.robot.commands.TestAprilTag;
 import frc.robot.commands.TurnToAngle;
+import frc.robot.commands.AprilTag.DriveStraightBackTagCmd;
+import frc.robot.commands.AprilTag.DriveStraightTagCmd;
+import frc.robot.commands.AprilTag.TestAprilTag;
+import frc.robot.commands.Arm.ArmDownCommand;
+import frc.robot.commands.Arm.ArmUpCommand;
+import frc.robot.commands.Climber.ClimberDownCommand;
+import frc.robot.commands.Climber.ClimberDownOverrideCmd;
+import frc.robot.commands.Climber.ClimberUpCommand;
+import frc.robot.commands.Climber.ClimberUpOverrideCmd;
+import frc.robot.commands.Intake.IntakeInCommand;
+import frc.robot.commands.Intake.IntakeOutCommand;
+import frc.robot.commands.Intake.IntakeOverrideCommand;
+import frc.robot.commands.Shooter.ShooterCommandAuto;
+import frc.robot.commands.Shooter.ShooterCommandTeleop;
 import frc.robot.commands.setpoints.AmpSetpoint;
 import frc.robot.commands.setpoints.IntakeSetpoint;
 import frc.robot.commands.setpoints.ShooterSetpoint;
@@ -108,25 +108,25 @@ public class RobotContainer {
     NamedCommands.registerCommand("Intake In", Commands.runOnce(() -> m_intakeSubsystem.intakeOn()));
     NamedCommands.registerCommand("Intake Off", Commands.runOnce(() -> m_intakeSubsystem.intakeOff()));
     NamedCommands.registerCommand("Shooter On", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.4)));
-    NamedCommands.registerCommand("Shooter On (IamSPED)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.5)));
+    NamedCommands.registerCommand("Shooter On (50)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.5)));
     NamedCommands.registerCommand("Shooter Off", Commands.runOnce(() -> m_shooterSubsystem.shooterOff()));
-    // NamedCommands.registerCommand("Climber down", Commands.runOnce(() -> m_climberSubsystem.jankClimber()));
-    NamedCommands.registerCommand("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
+    NamedCommands.registerCommand("Turn 90 Cmd", new TurnToAngle(m_swerveSubsystem, 90, false));
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(3));
     NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Reset Pose", Commands.runOnce(() -> m_swerveSubsystem.resetPose()));
-    NamedCommands.registerCommand("Test April Tag", new TestAprilTag(m_swerveSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("Shooter Command", new ShooterCommandAuto(m_shooterSubsystem, m_armSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("Two Piece Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.135)));
-    NamedCommands.registerCommand("Shooter Speed", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.44)));
-    NamedCommands.registerCommand("DriveTag", new DriveStraightTagCmd(m_swerveSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Tag Yaw Alignment", new TestAprilTag(m_swerveSubsystem).withTimeout(1));
+    NamedCommands.registerCommand("Tag Arm/Shooter Alignment", new ShooterCommandAuto(m_shooterSubsystem, m_armSubsystem).withTimeout(2));
+    NamedCommands.registerCommand("Two Piece Arm Setpoint", Commands.runOnce(() -> m_armSubsystem.setReference(-2.135)));
+    NamedCommands.registerCommand("Shooter on (44)", Commands.runOnce(() -> m_shooterSubsystem.shooterOn(0.44)));
+    NamedCommands.registerCommand("Drive Straight Back Tag", new DriveStraightBackTagCmd(m_swerveSubsystem).withTimeout(3));
+    NamedCommands.registerCommand("Drive Straight Tag", new DriveStraightTagCmd(m_swerveSubsystem).withTimeout(3));
     
     m_swerveSubsystem.setDefaultCommand(m_driveTeleopCmd);
 
     autoChooser = AutoBuilder.buildAutoChooser();
-    autoChooser.addOption("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
+    // autoChooser.addOption("Turn 90", new TurnToAngle(m_swerveSubsystem, 90, false));
     // m_limelighTable = m_inst.getTable("limelight-boombox");
     SmartDashboard.putData("Autos", autoChooser);
     // SmartDashboard.putData(m_limelighTable.getDeafa);
@@ -246,8 +246,8 @@ public class RobotContainer {
 
     // // Create a path following command using AutoBuilder. This will also trigger event markers.
     // return AutoBuilder.followPath(path);
-    //return autoChooser.getSelected();
     return autoChooser.getSelected();
+    // return null;
   }
 
 

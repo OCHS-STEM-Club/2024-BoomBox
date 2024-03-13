@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.AprilTag;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.SwerveSubsystem;
 
-public class DriveStraightTagCmd extends Command {
+public class DriveStraightBackTagCmd extends Command {
   private final SwerveSubsystem m_SwerveSubsystem;
 
   private final NetworkTableInstance m_inst = NetworkTableInstance.getDefault();
   private final NetworkTable m_limelighTable;
   private final PIDController m_yvalPidController = new PIDController(0.03, 0, 0);
   /** Creates a new TestAprilTag. */
-  public DriveStraightTagCmd(SwerveSubsystem swerveSubsystem) {
+  public DriveStraightBackTagCmd(SwerveSubsystem swerveSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_limelighTable = m_inst.getTable("limelight-boombox");
     m_SwerveSubsystem = swerveSubsystem;
