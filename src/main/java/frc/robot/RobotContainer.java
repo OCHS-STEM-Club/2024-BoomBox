@@ -49,7 +49,7 @@ import frc.robot.commands.Shooter.ShooterCommandTeleop;
 import frc.robot.commands.setpoints.AmpSetpoint;
 import frc.robot.commands.setpoints.IntakeSetpoint;
 import frc.robot.commands.setpoints.ShooterSetpoint;
-import frc.robot.commands.setpoints.TrapSetpoint;
+import frc.robot.commands.setpoints.ManualShooterSetpoint;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -90,10 +90,11 @@ public class RobotContainer {
   IntakeSetpoint m_intakeSetpoint = new IntakeSetpoint(m_armSubsystem);
   ShooterSetpoint m_shooterSetpoint = new ShooterSetpoint(m_armSubsystem);
   AmpSetpoint m_ampSetpoint = new AmpSetpoint(m_armSubsystem);
-  TrapSetpoint m_trapSetpoint = new TrapSetpoint(m_armSubsystem);
+  ManualShooterSetpoint m_manualShooterSetpoint = new ManualShooterSetpoint(m_armSubsystem);
   ClimberUpOverrideCmd m_climberUpOverrideCmd = new ClimberUpOverrideCmd(m_climberSubsystem);
   TestAprilTag m_testAprilTag = new TestAprilTag(m_swerveSubsystem);
   ClimberDownOverrideCmd m_ClimberDownOverrideCmd = new ClimberDownOverrideCmd(m_climberSubsystem);
+
 
 
   // private final NetworkTableInstance m_inst = NetworkTableInstance.getDefault();
@@ -114,7 +115,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Arm to Intake", new IntakeSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Arm to Shooter", new ShooterSetpoint(m_armSubsystem).withTimeout(1.5));
     NamedCommands.registerCommand("Intake in BB", new IntakeInCommand(m_intakeSubsystem).withTimeout(2));
-    NamedCommands.registerCommand("Arm to Trap", new TrapSetpoint(m_armSubsystem).withTimeout(0.5));
+    NamedCommands.registerCommand("Arm to Trap", new ManualShooterSetpoint(m_armSubsystem).withTimeout(0.5));
     NamedCommands.registerCommand("Reset Pose", Commands.runOnce(() -> m_swerveSubsystem.resetPose()));
     NamedCommands.registerCommand("Tag Yaw Alignment", new TestAprilTag(m_swerveSubsystem).withTimeout(1));
     NamedCommands.registerCommand("Tag Arm/Shooter Alignment", new ShooterCommandAuto(m_shooterSubsystem, m_armSubsystem).withTimeout(2));
@@ -192,7 +193,7 @@ public class RobotContainer {
     );
    
     m_buttonBox.leftTrigger().whileTrue(
-      m_trapSetpoint
+      m_manualShooterSetpoint
     );
     
 

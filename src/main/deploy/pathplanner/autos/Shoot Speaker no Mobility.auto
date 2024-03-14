@@ -36,12 +36,6 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "Scooch"
-          }
-        },
-        {
           "type": "wait",
           "data": {
             "waitTime": 1.0
