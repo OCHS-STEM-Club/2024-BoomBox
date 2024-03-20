@@ -173,7 +173,7 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void ampSetpoint() {
-     armPIDController.setReference(0.35, ControlType.kPosition);
+     armPIDController.setReference(0.36, ControlType.kPosition);
    // armMotorRight.set(pid.calculate(thru.getAbsolutePosition(),0));
   }
 

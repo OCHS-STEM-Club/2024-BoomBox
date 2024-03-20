@@ -39,9 +39,9 @@ public class DriveTeleopCmd extends Command {
   @Override
   public void execute() {
 
-    double xSpeed = -MathUtil.applyDeadband(m_driveJoystick.getRawAxis(1), OperatorConstants.kDriverControllerDeadband * 0.9);
-    double ySpeed = MathUtil.applyDeadband(m_driveJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband * 0.9);
-    double rotSpeed = MathUtil.applyDeadband(m_rotJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband * 0.9);
+    double xSpeed = -MathUtil.applyDeadband(m_driveJoystick.getRawAxis(1), OperatorConstants.kDriverControllerDeadband * 0.95);
+    double ySpeed = MathUtil.applyDeadband(m_driveJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband * 0.95);
+    double rotSpeed = MathUtil.applyDeadband(m_rotJoystick.getRawAxis(0), OperatorConstants.kDriverControllerDeadband);
 
     m_swerveSubsystem.drive(xSpeed, ySpeed, rotSpeed, true);
 
